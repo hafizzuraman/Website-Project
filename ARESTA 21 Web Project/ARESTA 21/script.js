@@ -1,7 +1,7 @@
 // Initialize Swiper
 new Splide( '.splide', {
     type: 'loop',
-    perPage: 3,             // Tampilkan 3 slide sekaligus
+    perPage: 4,             // Tampilkan 3 slide sekaligus
     focus: 'center',        // Slide aktif di tengah
     gap: '1rem',            // Jarak antar slide
     autoplay: true,
