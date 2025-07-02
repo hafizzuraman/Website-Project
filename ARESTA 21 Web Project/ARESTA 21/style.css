@@ -258,42 +258,64 @@ body::-webkit-scrollbar {
     border-radius: 10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
 }
-.swiper-container {
-    /* padding: 20px; */
-    display: flex;
-    justify-content: center;
-    color: var(--primary-color);
-    border-radius: 10px;
+/* Ukuran container agar slider tetap responsif */
+#image-slider {
+    max-width: 800px;
+    margin: 2rem auto;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
+/* Biar gambar tampil penuh dan rapi */
 .splide__slide img {
-    width: 200px;
-    height: 300px;
+    width: 100%;
+    height: auto;
+    display: block;
     object-fit: cover;
-    border-radius: 10px;
-    border: solid 4px var(--hover-color);
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.4s ease-in-out;
-}
-.splide__slide img:hover {
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 1);
-    transform: translateY(-10px);
-    transition: transform 0.4s ease-in-out;
+    border-radius: 8px;
 }
 
-.splide__slide {
-    background: none;
+/* Navigasi panah (Next & Prev) */
+.splide__arrow {
+    background-color: rgba(0, 0, 0, 0.4);
     color: white;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 350px;
-    width: 400px;
-    border-radius: 20px;
-    transition: transform 0.5s ease-in-out;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    transition: background-color 0.3s;
 }
+.splide__arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Dot navigasi di bawah slider */
+.splide__pagination {
+    bottom: -1.5rem;
+}
+.splide__pagination__page {
+    background: #ccc;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+.splide__pagination__page.is-active {
+    background: #333;
+}
+
+/* Responsive di layar kecil */
+@media (max-width: 768px) {
+    #image-slider {
+    max-width: 95%;
+}
+
+.splide__arrow {
+    padding: 8px;
+    }
+}
+
 .perlombaan {
     font-size: 1.2rem;
     padding-left: 50px;
