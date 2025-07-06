@@ -260,20 +260,28 @@ body::-webkit-scrollbar {
 }
 /* Ukuran container agar slider tetap responsif */
 #image-slider {
-    max-width: 800px;
+    max-width: 900px;
+    height: 250px;
     margin: 2rem auto;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    padding: 5% 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: var(--hover-color);
 }
 
 /* Biar gambar tampil penuh dan rapi */
 .splide__slide img {
     width: 100%;
-    height: auto;
+    height: 200PX;
     display: block;
     object-fit: cover;
     border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: solid 3px var(--secondary-color);
 }
 
 /* Navigasi panah (Next & Prev) */
