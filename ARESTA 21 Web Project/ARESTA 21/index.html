@@ -13,53 +13,77 @@
 </head>
 
 <body>
+<div class="intro-overlay" id="introOverlay">
+  <div class="logo-mask">
+    <img src="img/Logo sementara.jpeg" alt="Logo Aresta" class="intro-logo" id="introLogo" />
+    <div class="reveal-mask" id="revealMask"></div>
+  </div>
+</div>
+
 <header class="navbar">
 	<div class="logo">ARESTA 21</div>
 	<ul class="nav-links">
-		<li href="#">Home</li>
-		<li href="#">About</li>
-		<li href="#">Projects</li>
-		<li href="#">Contact</li>
+		<a href="#">Home</a>
+		<a href="#about">About</a>
+		<a href="#">Projects</a>
+		<a href="#kontak">Contact</a>
 	</ul>
 </header>
 
-<section class="hero">
-		<div class="divOne" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
-		<section>
-			<h1 style="font-size: 60px; color: gold; font-family: 'Montserrat', sans-serif; margin-bottom: 10px;">AJANG REMAJA<br> BERPRESTASI 21</h1>
-			<p style=" text-indent: 2em;">ARESTA atau Ajang Remaja Berprestasi adalah acara yang dibuat oleh santri Husnul Khotimah, dan di tahun ini adalah ARESTA yang ke-21 </p>
-		</section>
-		<section>
-			<h2>Latest News</h2>
-			<p>Stay tuned for our latest updates and announcements.</p>
-		</section>
-		<section>
-			<h2>Featured Services</h2>
-			<p>Explore our range of services designed to help you succeed.</p>
-		</section>
-		<a href="#" class="tombol-heroSetion">Daftar Sekarang!</a>
-		</div>
+<section id="hero" class="hero">
+  <div class="typed-text" id="tema-typed"></div>
 
-		<div class="divTwo">
-			<img src="img/maskot tes.png" alt="ARESTA 21 Image" class="hero-image">
-		</div>
+  <img src="img/Logo sementara.jpeg" alt="Logo Aresta" class="hero-logo">
+  <p class="hero-sub pill">WE WILL BEGIN</p>
+
+  <div class="countdown-container" id="countdown">
+    <div class="count-block">
+      <div class="count-number" id="days">00</div>
+      <div class="count-label">Hari</div>
+    </div>
+    <div class="count-block">
+      <div class="count-number" id="hours">00</div>
+      <div class="count-label">Jam</div>
+    </div>
+    <div class="count-block">
+      <div class="count-number" id="minutes">00</div>
+      <div class="count-label">Menit</div>
+    </div>
+    <div class="count-block">
+      <div class="count-number" id="seconds">00</div>
+      <div class="count-label">Detik</div>
+    </div>
+  </div>
 </section>
 
-<section class="about">
-	<h1 class="about-tittle"><i>ABOUT ARESTA 21</i></h1>
-	<div class="about-content" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
-		<h2>ABOUT ARESTA 21</h2>
-		<p>Aresta Merupakan Akronim dari Ajang Remaja Berprestasi yang diselenggarakan oleh Dewan eksekutif organisansi santri husnul khotimah dan selalu diadakan di tiap tahunnya tanpa terputus, dan kini aresta telah memasuki tahun yang ke 21.
-			Acara ini berkonsep sebuah kompetisi yang diperuntukan kepada para siswa/i tanah air indonesia, pada tahun ini aresta mengangkat sebuah isu Restorasi : “Pentas pemikiran diri, Identitas muasal Negeri.” dan dengan isu ini, diharapkan kami selaku panitia ARESTA 21 ingin memperbaiki, meronai, serta mensaturasi pola pikir pemuda dengan nilai-nilai kebangsaan serta merubahnya ke arah yang lebih maju.</p>
-	</div>
-	
-	<div class="about-video-container" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
-		<video class="about-video" controls autoplay muted>
-			<source src="Video/Retro Band.mp4" type="video/mp4">
-			Your browser does not support the video tag.
-		</video>
-	</div>
+
+<section id="about" class="about">
+  <h1 class="about-tittle"><i>ABOUT ARESTA 21</i></h1>
+
+  <div class="about-content" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
+    <h2>ABOUT ARESTA 21</h2>
+    <p>
+      Aresta Merupakan Akronim dari Ajang Remaja Berprestasi yang diselenggarakan oleh Dewan eksekutif organisansi santri husnul khotimah dan selalu diadakan di tiap tahunnya tanpa terputus, dan kini aresta telah memasuki tahun yang ke 21.
+      Acara ini berkonsep sebuah kompetisi yang diperuntukan kepada para siswa/i tanah air indonesia, pada tahun ini aresta mengangkat sebuah isu Restorasi : “Pentas pemikiran diri, Identitas muasal Negeri.” dan dengan isu ini, diharapkan kami selaku panitia ARESTA 21 ingin memperbaiki, meronai, serta mensaturasi pola pikir pemuda dengan nilai-nilai kebangsaan serta merubahnya ke arah yang lebih maju.
+    </p>
+  </div>
+
+  <div class="about-video-container" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
+  <div class="video-wrapper">
+    <iframe 
+      class="about-video"
+      src="https://www.youtube.com/embed/NrKo59zTbew?autoplay=1&mute=1"
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
 </section>
+
+<!--Events-->
+
+<!--Timeline-->
 
 <section class="event-section">
 	<h1 class="event-title"><i>OUR EVENTS</i></h1>
@@ -97,20 +121,44 @@
 	</div>
 </section>
 
-<footer>
-	<div class="footer-container">
-    <div class="footer-logo">✨ ARESTA 21 ✨</div>
-    <div class="footer-links">
-		<a href="#">Instagram</a>
-		<a href="#">Facebook</a>
-		<p>Contac Person, Ikhwan: +62...</p>
-		<p>Contac Person, Akhwat: +62...</p>
+<!--Info Homestay-->
+
+<!--Sponsor-->
+
+<section id="kontak" data-aos="fade-up">
+  <div class="footer-container">
+    <div class="footer-column" style="text-align: left;">
+      <h3>Pondok Pesantren Husnul Khotimah</h3>
+      <p>Jl. Manis Kidul-Sayana No.84, Maniskidul,<br> Kec. Jalaksana,
+         Kabupaten Kuningan, Jawa Barat 45554, Indonesia</p>
+      <h4>0812-3456-7890</h4>
     </div>
-	<div class="footer-copy">
-		&copy; 2025 AcaraKeren. All rights reserved.
-	</div>
-</div>
+
+    <div class="footer-column" style="text-align: center;">
+      <h3>Follow Us</h3>
+      <p>Instagram</p>
+      <p>TikTok</p>
+      <p>Email</p>
+    </div>
+
+    <div class="footer-column" style="text-align: right;">
+      <h3>Lokasi</h3>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507022.55462580756!2d107.73004894966456!3d-6.87697797791694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f1773e6e7bd07%3A0x8921f02afcb4b176!2sHusnul%20Khotimah%20Boarding%20School!5e0!3m2!1sen!2sid!4v1751331729793!5m2!1sen!2sid"
+        width="100%" height="150" style="border:0; border-radius:8px;"
+        allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">✨ ARESTA 21 ✨</div>
+  <div class="footer-copy">
+    &copy; 2025 AcaraKeren. All rights reserved.
+  </div>
 </footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
@@ -122,5 +170,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script> 	
 <script src="JS/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="script.js"></script>
 </body>
 </html>
