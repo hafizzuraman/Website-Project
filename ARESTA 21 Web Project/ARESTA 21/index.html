@@ -23,27 +23,32 @@
 	</ul>
 </header>
 
-<section class="hero">
-		<div class="divOne" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
-		<section>
-			<h1 style="font-size: 60px; color: gold; font-family: 'Montserrat', sans-serif; margin-bottom: 10px;">AJANG REMAJA<br> BERPRESTASI 21</h1>
-			<p style=" text-indent: 2em;">ARESTA atau Ajang Remaja Berprestasi adalah acara yang dibuat oleh santri Husnul Khotimah, dan di tahun ini adalah ARESTA yang ke-21 </p>
-		</section>
-		<section>
-			<h2>Latest News</h2>
-			<p>Stay tuned for our latest updates and announcements.</p>
-		</section>
-		<section>
-			<h2>Featured Services</h2>
-			<p>Explore our range of services designed to help you succeed.</p>
-		</section>
-		<a href="#" class="tombol-heroSetion">Daftar Sekarang!</a>
-		</div>
+<section id="hero" class="hero">
+  <div class="typed-text" id="tema-typed"></div>
 
-		<div class="divTwo">
-			<img src="img/maskot tes.png" alt="ARESTA 21 Image" class="hero-image">
-		</div>
+  <img src="img/Logo sementara.jpeg" alt="Logo Aresta" class="hero-logo">
+  <p class="hero-sub pill">WE WILL BEGIN</p>
+
+  <div class="countdown-container" id="countdown">
+    <div class="count-block">
+      <div class="count-number" id="days">00</div>
+      <div class="count-label">Hari</div>
+    </div>
+    <div class="count-block">
+      <div class="count-number" id="hours">00</div>
+      <div class="count-label">Jam</div>
+    </div>
+    <div class="count-block">
+      <div class="count-number" id="minutes">00</div>
+      <div class="count-label">Menit</div>
+    </div>
+    <div class="count-block">
+      <div class="count-number" id="seconds">00</div>
+      <div class="count-label">Detik</div>
+    </div>
+  </div>
 </section>
+
 
 <section id="about" class="about">
   <h1 class="about-tittle"><i>ABOUT ARESTA 21</i></h1>
@@ -69,6 +74,7 @@
 </div>
 </section>
 
+<!--Timeline-->
 
 <section class="event-section">
 	<h1 class="event-title"><i>OUR EVENTS</i></h1>
@@ -105,9 +111,12 @@
 		</div>
 </section>
 
+<!--Info Homestay-->
+
+<!--Sponsor-->
+
 <section id="kontak" data-aos="fade-up">
   <div class="footer-container">
-    <!-- Kiri -->
     <div class="footer-column" style="text-align: left;">
       <h3>Pondok Pesantren Husnul Khotimah</h3>
       <p>Jl. Manis Kidul-Sayana No.84, Maniskidul,<br> Kec. Jalaksana,
@@ -115,7 +124,6 @@
       <h4>0812-3456-7890</h4>
     </div>
 
-    <!-- Tengah -->
     <div class="footer-column" style="text-align: center;">
       <h3>Follow Us</h3>
       <p>Instagram</p>
@@ -123,7 +131,6 @@
       <p>Email</p>
     </div>
 
-    <!-- Kanan -->
     <div class="footer-column" style="text-align: right;">
       <h3>Lokasi</h3>
       <iframe
@@ -152,6 +159,7 @@
 	});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script> 	
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script src="script.js"></script>
 </body>
 </html>
