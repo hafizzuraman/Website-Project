@@ -40,3 +40,28 @@ new Typed('#tema-typed', {
   }
 
   setInterval(updateCountdown, 1000);
+
+
+  // Setelah mask selesai (1.6s), tunggu dikit, lalu fade out logo dan mask
+  setTimeout(() => {
+    const logo = document.getElementById('introLogo');
+    const mask = document.getElementById('revealMask');
+    if (logo) logo.style.opacity = '0';
+    if (mask) {
+      mask.style.opacity = '0';
+      mask.style.transition = 'opacity 0.4s ease';
+    }
+  }, 1900); // tunggu mask selesai (1.6s + 0.3 delay)
+
+  // Setelah itu, gold background naik ke atas
+  setTimeout(() => {
+    document.getElementById('introOverlay')?.classList.add('gold-slide');
+  }, 2400); // 0.5 detik setelah fade out
+
+  // Hapus overlay dari DOM
+  setTimeout(() => {
+    document.getElementById('introOverlay')?.remove();
+  }, 3200);
+
+
+
