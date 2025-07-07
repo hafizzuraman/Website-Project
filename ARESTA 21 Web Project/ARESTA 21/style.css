@@ -21,6 +21,62 @@ body::-webkit-scrollbar {
     --text-color: white;
     --hover-color: gold;
 }
+
+/*LOADING */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: gold;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo-mask {
+  position: relative;
+  width: 220px;
+  height: auto;
+}
+
+.intro-logo {
+  width: 100%;
+  opacity: 0.3;
+  z-index: 2;
+  position: relative;
+  transition: opacity 0.4s ease;
+}
+
+.reveal-mask {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0%;
+  width: 100%;
+  background: gold;
+  mix-blend-mode: screen;
+  animation: wipeReveal 1.6s ease forwards;
+  z-index: 3;
+}
+
+@keyframes wipeReveal {
+  from { height: 0%; }
+  to   { height: 100%; }
+}
+
+.gold-slide {
+  animation: slideUpGold 0.8s ease forwards;
+}
+
+@keyframes slideUpGold {
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 /* NAVBAR */
 .navbar {
     display: flex;
