@@ -129,55 +129,14 @@ body::-webkit-scrollbar {
 /* HERO SECTION */
 .hero {
     padding: 5% 5%;
-    align-items: right;
+    align-items: center;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 20px;
+    place-items: center;
+    gap: 24px;
     max-height: 610px;
     background: linear-gradient(135deg, #233146, #293c69);
 }
 
-.hero .divOne {
-    grid-row: span 4 / span 4;
-    gap: 30px;
-    padding-top: 10%;
-    animation-delay: 0.5s;
-    transform: translateX(-300px);
-    opacity: 0;
-}
-
-.hero .divOne a {
-    display: flex;
-    padding: 10px 20px;
-    background-color: var(--hover-color);
-    color: var(--secondary-color);
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    justify-content: center;
-    text-align: center;
-    width: 200px;
-    transition: background-color 0.5s ease, transform 0.5s ease;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: 20px;
-}
-.hero .divOne a:hover {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    transform: translateY(-5px);
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 1);
-}
-
-.hero .divTwo {
-    grid-row: span 4 / span 4;
-    padding-left: 15%;
-}
-
-.hero .hero-image {
-    animation: gerak 2s ease-in-out infinite alternate;
-}
 
 @keyframes gerak {
     0% {
@@ -187,6 +146,76 @@ body::-webkit-scrollbar {
         transform: translateY(-15px);
     }
 }
+
+.typed-text {
+  font-size: 32px;
+  font-weight: 600;
+  min-height: 60px;
+  text-align: center;
+  color: gold;
+}
+
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.hero-logo {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 50px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid gold;
+  border-radius: 999px;
+  color: gold;
+  font-weight: 500;
+  font-size: 18px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.pill:hover {
+  background: gold;
+  color: #0f172a;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+}
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.count-block {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 80px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.count-number {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.count-label {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* about */
 
 .about {
     font-size: 1.2rem;
