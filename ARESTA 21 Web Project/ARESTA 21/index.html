@@ -21,14 +21,22 @@
 </div>
 
 <header class="navbar">
-	<div class="logo">ARESTA 21</div>
-	<ul class="nav-links">
-		<a href="#">Home</a>
-		<a href="#about">About</a>
-		<a href="#">Projects</a>
-		<a href="#kontak">Contact</a>
-	</ul>
+  <div class="logo">ARESTA 21</div>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#">Projects</a>
+    <a href="#kontak">Contact</a>
+  </ul>
 </header>
+
 
 <section id="hero" class="hero">
   <div class="typed-text" id="tema-typed"></div>
@@ -81,49 +89,52 @@
 </div>
 </section>
 
-<!--Events-->
-
-<!--Timeline-->
-
 <section class="event-section">
 	<h1 class="event-title"><i>OUR EVENTS</i></h1>
 	<div class="swiper-container" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
-		<div id="image-slider" class="splide">
+		<div class="splide" aria-label="Splide Basic Slider">
 			<div class="splide__track">
 				<ul class="splide__list">
-					<li class="splide__slide"><img src="https://picsum.photos/600/300?random=1" /></li>
-					<li class="splide__slide"><img src="https://picsum.photos/600/300?random=2" /></li>
-					<li class="splide__slide"><img src="https://picsum.photos/600/300?random=3" /></li>
+					<li class="splide__slide"><img src="img/phevent1.webp" alt="agenda 1"></li>
+					<li class="splide__slide"><img src="img/phevent2.webp" alt="agenda 2"></li>
+					<li class="splide__slide"><img src="img/phevent3.webp" alt="agenda 3"></li>
+          <li class="splide__slide"><img src="img/phevent4.webp" alt="agenda 4"></li>
+					<li class="splide__slide"><img src="img/phevent5.webp" alt="agenda 5"></li>
+          <li class="splide__slide"><img src="img/phevent6.webp" alt="agenda 6"></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-	<div class="perlombaan" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-out">
-		<h2>Daftar Perlombaan</h2>
-		<ul>
-			<li>Musikalisasi Puisi</li>
-			<li>Stand Up Comedy</li>
-			<li>Solo Vocal</li>
-			<li>Band</li>
-			<li>Desain Poster</li>
-			<li>Fotografi</li>
-			<li>Video Kreatif</li>
-			<li>Debat Bahasa Inggris</li>
-			<li>Debat Bahasa Arab</li>
-			<li>Tari Tradisional</li>
-			<li>Tari Modern</li>
-			<li>Drama</li>
-			<li>Kaligrafi</li>
-			<li>Lomba Cerdas Cermat</li>
-			<li>Lomba Mewarnai untuk Anak-anak</li>
-		</ul>
-	</div>
-</section>
+<!--Timeline-->
+
+<!--Perlombaan-->
 
 <!--Info Homestay-->
 
-<!--Sponsor-->
+<h1 class="event-title"><i>SPONSOR</i></h1>
+<div class="sponsor-marquee">
+  <div class="sponsor-track">
+    <img src="https://cdn.simpleicons.org/google" alt="Google" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/facebook" alt="Facebook" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/youtube" alt="YouTube" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/apple" alt="Apple" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/x" alt="Twitter/X" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/instagram" alt="Instagram" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/spotify" alt="Spotify" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" class="sponsor-logo" />
+
+    <!-- COPY ulang isi biar looping seamless -->
+    <img src="https://cdn.simpleicons.org/google" alt="Google" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/facebook" alt="Facebook" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/youtube" alt="YouTube" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/apple" alt="Apple" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/x" alt="Twitter/X" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/instagram" alt="Instagram" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/spotify" alt="Spotify" class="sponsor-logo" />
+    <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" class="sponsor-logo" />
+  </div>
+</div>
 
 <section id="kontak" data-aos="fade-up">
   <div class="footer-container">
@@ -169,7 +180,6 @@
 	});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script> 	
-<script src="JS/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script src="script.js"></script>
 </body>
