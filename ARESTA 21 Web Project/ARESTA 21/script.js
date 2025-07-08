@@ -1,13 +1,3 @@
-// Initialize Swiper
-new Splide( '.splide', {
-    type: 'loop',
-    perPage: 3,             // Tampilkan 3 slide sekaligus
-    focus: 'center',        // Slide aktif di tengah
-    gap: '1rem',            // Jarak antar slide
-    autoplay: true,
-    padding: '2rem',        // Tambahkan padding supaya sisi kiri/kanan ada space
-}).mount();
-
 new Typed('#tema-typed', {
     strings: [
       '"Genggam Dunia dengan Impianmu, Ubah Dunia dengan Potensimu"'
@@ -63,5 +53,38 @@ new Typed('#tema-typed', {
     document.getElementById('introOverlay')?.remove();
   }, 3200);
 
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const splide = new Splide('.splide', {
+    type: 'loop',
+    gap: '1rem',
+    padding: '1rem',
+    autoplay: true,
+    interval: 5000, //(ms)
+    pauseOnHover: false,
+    perPage: 5,
+    focus: 0, // ⬅️ Ini bikin setiap kartu dianggap slide individu
+    pagination: false, // optional kalau lo mau buang titiknya
+    breakpoints: {
+      1024: {
+        perPage: 4,
+      },
+      768: {
+        perPage: 1,
+      },
+    },
+  });
+
+  splide.mount();
+
+  setTimeout(() => splide.refresh(), 300);
+});
 
 
