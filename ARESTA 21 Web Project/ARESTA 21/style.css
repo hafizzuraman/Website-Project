@@ -491,10 +491,6 @@ section {
   background: var(--surface);
 }
 
-/* =========================================================
-   8) Time Line Section
-========================================================= */
-
 /* ====================
    TIMELINE SECTION
 ==================== */
@@ -591,31 +587,62 @@ section {
   color: var(--muted);
 }
 
-/* ====================
-   RESPONSIVE MODE
-==================== */
-@media screen and (max-width: 768px) {
+/* =========================
+   Responsive Timeline (HP)
+========================= */
+@media (max-width: 768px) {
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* jarak antar box */
+    align-items: stretch; /* biar semua box full lebar */
+    position: relative;
+  }
+
+  /* Hapus garis tengah */
+  .timeline::before,
   .timeline::after {
-    left: 8px; /* geser garis ke kiri */
+    display: none;
   }
 
+  /* Setiap box item */
   .timeline-item {
-    width: 100%;
-    padding-left: 40px;
-    padding-right: 25px;
-    text-align: left !important;
-    transform: translateY(50px); /* animasi masuk dari bawah */
+    width: 100%; /* full lebar container */
+    text-align: left; /* rata kiri */
+    padding: 20px;
+    background: var(--gradient);
+    color: var(--surface);
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    box-sizing: border-box;
   }
 
-  .timeline-item.show {
-    transform: translateY(0);
-  }
-
+  /* Hapus titik lingkaran */
   .timeline-item::before {
+    display: none;
+  }
+
+  /* Biar konten rapi */
+  .timeline-item .content {
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .timeline-item .date {
+    font-size: 14px;
+    color: #f1f1f1;
+  }
+
+  /* Reset class left & right */
+  .timeline-item.left,
+  .timeline-item.right {
     left: 0;
-    right: auto;
+    transform: none;
+    text-align: left;
   }
 }
+
+
 
 /* Splide custom minimal */
 .splide {
@@ -684,6 +711,43 @@ section {
   opacity: 1;
   transform: translateY(-2px);
 }
+
+/* =========================
+   Responsive HP (max-width: 768px)
+========================= */
+@media (max-width: 768px) {
+  /* Splide tetap sama kaya desktop, cuma kasih padding */
+  .splide {
+    max-width: 100%;
+    margin: 12px auto 0;
+    padding: 0 12px; /* biar ga nempel ke tepi layar */
+  }
+
+  .splide__slide img {
+    width: 100%;
+    height: 100%; /* biar proporsional tapi bentuk sama */
+    max-height: 260px; /* jaga proporsi biar gak kepanjangan */
+  }
+
+  /* Arrow & dots biarin sama aja, ga usah dikecilin */
+  .splide__arrow {
+    width: 38px;
+    height: 38px;
+  }
+o
+  /* Sponsor marquee hampir sama */
+  .sponsor-track {
+    gap: 40px; /* sedikit lebih rapat tapi bentuk sama */
+    padding: 16px 8px;
+    animation: scroll-left 22s linear infinite;
+  }
+
+  .sponsor-logo {
+    width: 56px;
+    height: 56px;
+  }
+}
+
 
 /* =========================================================
    9) CONTACT / FOOTER GRID
