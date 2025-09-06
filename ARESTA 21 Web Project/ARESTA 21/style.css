@@ -587,6 +587,85 @@ section {
   color: var(--muted);
 }
 
+/* ====================
+   lomba section
+==================== */
+
+    /* === Button Filter === */
+    .grade-filter {
+      text-align: center;
+      margin: 15px 0 40px;
+    }
+
+    .grade-filter button {
+      background: #fff;
+      border: 2px solid #000;
+      color: #000;
+      padding: 8px 16px;
+      margin: 0 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .grade-filter button.active {
+      background: #f5d100;
+      color: #000;
+    }
+
+    /* === Cards === */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 0 40px 60px;
+    }
+
+    .card {
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+    }
+
+    .card .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px;
+    }
+
+    .card .btn {
+      background: #fff;
+      color: #000;
+      padding: 8px 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .card .btn:hover {
+      background: #f5d100;
+    }
+
+    .btn-blue {
+      background: #0c3b9c;
+      color: #fff !important;
+    }
+
+    .btn-blue:hover {
+      background: #f5d100;
+      color: #000 !important;
+    }
 /* =========================
    Responsive Timeline (HP)
 ========================= */

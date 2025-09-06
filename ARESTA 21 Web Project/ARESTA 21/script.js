@@ -144,3 +144,24 @@ window.addEventListener("load", () => {
     }, { threshold: 0.2 });
 
     items.forEach(item => observer.observe(item));
+
+  
+/* ========================= 
+    lomba section filter
+========================= */
+     // Filter Function
+    function filterGrade(grade) {
+      const buttons = document.querySelectorAll('.grade-filter button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        if (card.getAttribute('data-grade').includes(grade)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
