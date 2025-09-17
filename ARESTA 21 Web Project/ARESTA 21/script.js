@@ -17,7 +17,7 @@ new Typed('#tema-typed', {
 /* =========================
    Countdown Timer
 ========================= */
-const targetTime = new Date("2026-02-05T00:00:00").getTime();
+const targetTime = new Date("2026-01-31T00:00:00").getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
