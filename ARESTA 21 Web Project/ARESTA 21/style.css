@@ -154,18 +154,6 @@ section {
   box-shadow: 0 0 30px var(--accent);
 }
 
-/* Text */
-.loader-text {
-  margin-top: 20px;
-  font-family: "Poppins", sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--primary);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  animation: fadeBlink 1.8s infinite;
-}
-
 /* Animasi Logo */
 @keyframes pulse {
   0% { transform: scale(1); box-shadow: 0 0 15px #703df033; }
@@ -431,7 +419,8 @@ section {
 .about .about-title,
 .event-section ,
 .event-title,
-.TimeLine-h2 {
+.TimeLine-h2,
+.Competition-card {
   text-align: center;
   font-size: clamp(1.4rem, 2.6vw, 2rem);
   margin-bottom: 28px;
