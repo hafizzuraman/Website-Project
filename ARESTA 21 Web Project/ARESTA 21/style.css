@@ -24,6 +24,8 @@
   /* Shadows & Radius */
   --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-bold: 0 15px 40px rgba(0, 0, 0, 0.16);
+  --shadow-hover:0 6px 14px rgba(0, 0, 0, 10.08)
   --radius-sm: 10px;
   --radius: 14px;
   --radius-lg: 18px;
@@ -357,6 +359,9 @@ section {
   font-size: clamp(1rem, 1.5vw, 1.15rem);
   color: var(--muted);
   letter-spacing: 0.4px;
+  position: relative;
+  top: 0px;
+  bottom: 0px;
   align-items: center;
   text-align: center;
   color: var(--bg);
@@ -493,7 +498,7 @@ section {
 
 
 /* Garis tengah timeline */
-.timeline::after {
+.timeline::before {
   content: '';
   position: absolute;
   width: 4px;
@@ -535,13 +540,14 @@ section {
 }
 
 /* Titik bulat di garis timeline */
-.timeline-item::before {
+.timeline-item::after {
   content: '';
   position: absolute;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #fff;
+  z-index: 1;
+  background: gold;
   top: 30px;
   z-index: 1;
   box-shadow: 0 0 10px rgba(255,255,255,0.6);
@@ -549,12 +555,12 @@ section {
 }
 
 /* Posisi titik di kiri */
-.timeline-item.left::before {
+.timeline-item.left::after {
   right: -10px;
 }
 
 /* Posisi titik di kanan */
-.timeline-item.right::before {
+.timeline-item.right::after {
   left: -10px;
 }
 
@@ -588,9 +594,9 @@ section {
 
     .grade-filter button {
       background: #fff;
-      border: 2px solid #000;
-      color: #000;
+      box-shadow: var(--shadow-soft);
       padding: 8px 16px;
+      border-radius: 8px;
       margin: 0 6px;
       font-size: 1rem;
       font-weight: bold;
@@ -612,10 +618,11 @@ section {
     }
 
     .card {
-      background: #111;
+      background: var(--surface);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       text-align: center;
     }
 
@@ -633,11 +640,13 @@ section {
 
     .card .btn {
       background: #fff;
-      color: #000;
+      color: var(--gradient);
       padding: 8px 14px;
       border: none;
       font-weight: bold;
       cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: 0.3s;
       text-decoration: none;
     }
@@ -648,7 +657,7 @@ section {
 
     .btn-blue {
       background: #0c3b9c;
-      color: #fff !important;
+      color: #000000 !important;
     }
 
     .btn-blue:hover {
