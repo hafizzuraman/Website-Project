@@ -1,422 +1,355 @@
-/* =========================
-   Typed.js Hero Animation
-========================= */
-new Typed('#tema-typed', {
-  strings: [
-    '"Genggam Dunia dengan Impianmu, Ubah Dunia dengan Potensimu"'
-  ],
-  typeSpeed: 60,
-  backSpeed: 30,
-  backDelay: 2000,
-  startDelay: 300,
-  loop: true,
-  showCursor: false
-});
+// script.js (reworked for plain HTML project)
+// - Compatible with the HTML you provided (no React, no imports)
+// - Defensive: checks for lib availability (Typed, Splide)
+// - Accessible hamburger (aria-expanded), Escape to close
+// - filterGrade supports both onclick="filterGrade('SD')" and onclick="filterGrade(event,'SD')"
 
-import GradualBlur from './GradualBlur';
-/* =========================
-   Countdown Timer
-========================= */
-const targetTime = new Date("2026-01-31T00:00:00").getTime();
+(() => {
+  'use strict';
 
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = targetTime - now;
-
-  if (distance < 0) return;
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((distance / (1000 * 60)) % 60);
-  const seconds = Math.floor((distance / 1000) % 60);
-
-  document.getElementById("days").textContent = String(days).padStart(2, "0");
-  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-}
-setInterval(updateCountdown, 1000);
-
-
-/* =========================
-   Intro Animation (Logo + Mask)
-========================= */
-// Setelah mask selesai (1.6s), tunggu dikit, lalu fade out logo dan mask
-setTimeout(() => {
-  const logo = document.getElementById('introLogo');
-  const mask = document.getElementById('revealMask');
-  if (logo) logo.style.opacity = '0';
-  if (mask) {
-    mask.style.opacity = '0';
-    mask.style.transition = 'opacity 0.4s ease';
-  }
-}, 1900); // tunggu mask selesai (1.6s + 0.3 delay)
-
-// Setelah itu, gold background naik ke atas
-setTimeout(() => {
-  document.getElementById('introOverlay')?.classList.add('gold-slide');
-}, 2400); // 0.5 detik setelah fade out
-
-// Hapus overlay dari DOM
-setTimeout(() => {
-  document.getElementById('introOverlay')?.remove();
-}, 3200);
-
-
-/* =========================
-   Splide.js Carousel
-========================= */
-document.addEventListener('DOMContentLoaded', function () {
-  const splide = new Splide('.splide', {
-    type: 'loop',
-    gap: '1rem',
-    padding: '1rem',
-    autoplay: true,
-    interval: 5000, // ms
-    pauseOnHover: false,
-    perPage: 5,
-    focus: 0, // setiap kartu dianggap slide individu
-    pagination: false,
-    breakpoints: {
-      1024: { perPage: 4 },
-      768: { perPage: 1 },
-    },
-  });
-
-  splide.mount();
-  setTimeout(() => splide.refresh(), 300);
-});
-
-
-/* =========================
-   Hamburger Menu Animated
-========================= */
-const hamburger = document.getElementById("hamburger");
-const navLinks = document.getElementById("navLinks");
-const navItems = document.querySelectorAll(".nav-links a");
-
-// Klik hamburger → toggle menu
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
-  navLinks.classList.toggle("open");
-
-  // animasi stagger (delay tiap item)
-  navItems.forEach((item, index) => {
-    if (navLinks.classList.contains("open")) {
-      item.style.animation = `fadeIn 0.4s ease forwards ${index * 0.1 + 0.2}s`;
-    } else {
-      item.style.animation = "";
-    }
-  });
-});
-
-// auto-close kalau link diklik
-navItems.forEach(item => {
-  item.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    navLinks.classList.remove("open");
-    navItems.forEach(link => (link.style.animation = ""));
-  });
-});
-
-/* ========================= 
-    Loading Screen Fade Out
-========================= */
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  setTimeout(() => {
-    loader.classList.add("fade-out");
-  }, 1500); // delay 1.5s biar smooth
-});
-
-/* ========================= 
-    Time Line Section
-========================= */
-    // Animasi muncul saat discroll
-    const items = document.querySelectorAll('.timeline-item');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.2 });
-
-    items.forEach(item => observer.observe(item));
-
-  
-/* ========================= 
-    lomba section filter
-========================= */
-     // Filter Function
-    function filterGrade(grade) {
-      const buttons = document.querySelectorAll('.grade-filter button');
-      buttons.forEach(btn => btn.classList.remove('active'));
-
-      event.target.classList.add('active');
-
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        if (card.getAttribute('data-grade').includes(grade)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    }
-
-    import React, { useEffect, useRef, useState, useMemo } from 'react';
-import * as math from 'mathjs';
-
-import './GradualBlur.css';
-
-const DEFAULT_CONFIG = {
-  position: 'bottom',
-  strength: 2,
-  height: '6rem',
-  divCount: 5,
-  exponential: false,
-  zIndex: 1000,
-  animated: false,
-  duration: '0.3s',
-  easing: 'ease-out',
-  opacity: 1,
-  curve: 'linear',
-  responsive: false,
-  target: 'parent',
-  className: '',
-  style: {}
-};
-
-const PRESETS = {
-  top: { position: 'top', height: '6rem' },
-  bottom: { position: 'bottom', height: '6rem' },
-  left: { position: 'left', height: '6rem' },
-  right: { position: 'right', height: '6rem' },
-  subtle: { height: '4rem', strength: 1, opacity: 0.8, divCount: 3 },
-  intense: { height: '10rem', strength: 4, divCount: 8, exponential: true },
-  smooth: { height: '8rem', curve: 'bezier', divCount: 10 },
-  sharp: { height: '5rem', curve: 'linear', divCount: 4 },
-  header: { position: 'top', height: '8rem', curve: 'ease-out' },
-  footer: { position: 'bottom', height: '8rem', curve: 'ease-out' },
-  sidebar: { position: 'left', height: '6rem', strength: 2.5 },
-  'page-header': { position: 'top', height: '10rem', target: 'page', strength: 3 },
-  'page-footer': { position: 'bottom', height: '10rem', target: 'page', strength: 3 }
-};
-
-const CURVE_FUNCTIONS = {
-  linear: p => p,
-  bezier: p => p * p * (3 - 2 * p),
-  'ease-in': p => p * p,
-  'ease-out': p => 1 - Math.pow(1 - p, 2),
-  'ease-in-out': p => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2)
-};
-
-const mergeConfigs = (...configs) => configs.reduce((acc, c) => ({ ...acc, ...c }), {});
-const getGradientDirection = position =>
-  ({
-    top: 'to top',
-    bottom: 'to bottom',
-    left: 'to left',
-    right: 'to right'
-  })[position] || 'to bottom';
-
-const debounce = (fn, wait) => {
-  let t;
-  return (...a) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn(...a), wait);
-  };
-};
-
-const useResponsiveDimension = (responsive, config, key) => {
-  const [value, setValue] = useState(config[key]);
-  useEffect(() => {
-    if (!responsive) return;
-    const calc = () => {
-      const w = window.innerWidth;
-      let v = config[key];
-      if (w <= 480 && config[`mobile${key[0].toUpperCase() + key.slice(1)}`])
-        v = config[`mobile${key[0].toUpperCase() + key.slice(1)}`];
-      else if (w <= 768 && config[`tablet${key[0].toUpperCase() + key.slice(1)}`])
-        v = config[`tablet${key[0].toUpperCase() + key.slice(1)}`];
-      else if (w <= 1024 && config[`desktop${key[0].toUpperCase() + key.slice(1)}`])
-        v = config[`desktop${key[0].toUpperCase() + key.slice(1)}`];
-      setValue(v);
+  /* ---------- Helpers ---------- */
+  const debounce = (fn, wait = 100) => {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...args), wait);
     };
-    const debounced = debounce(calc, 100);
-    calc();
-    window.addEventListener('resize', debounced);
-    return () => window.removeEventListener('resize', debounced);
-  }, [responsive, config, key]);
-  return responsive ? value : config[key];
-};
+  };
 
-const useIntersectionObserver = (ref, shouldObserve = false) => {
-  const [isVisible, setIsVisible] = useState(!shouldObserve);
+  const safeQuery = (sel) => document.querySelector(sel);
 
-  useEffect(() => {
-    if (!shouldObserve || !ref.current) return;
+  /* ---------- DOM Ready ---------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    /* =========================
+       Typed.js Hero Animation
+       ========================= */
+    if (window.Typed && safeQuery('#tema-typed')) {
+      try {
+        // single string, looping, no cursor
+        /* eslint-disable no-new */
+        new Typed('#tema-typed', {
+          strings: ['"Genggam Dunia dengan Impianmu, Ubah Dunia dengan Potensimu"'],
+          typeSpeed: 60,
+          backSpeed: 30,
+          backDelay: 2000,
+          startDelay: 300,
+          loop: true,
+          showCursor: false
+        });
+      } catch (err) {
+        // ignore typed init failure
+        // console.warn('Typed init failed', err);
+      }
+    }
 
-    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
+    /* =========================
+       Countdown Timer
+       ========================= */
+    (function initCountdown() {
+      const daysEl = safeQuery('#days');
+      const hoursEl = safeQuery('#hours');
+      const minutesEl = safeQuery('#minutes');
+      const secondsEl = safeQuery('#seconds');
+      const countdownContainer = safeQuery('#countdown');
 
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [ref, shouldObserve]);
+      // keep your provided target date
+      const targetTime = new Date('2026-01-31T00:00:00').getTime();
 
-  return isVisible;
-};
+      if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 
-function GradualBlur(props) {
-  const containerRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const config = useMemo(() => {
-    const presetConfig = props.preset && PRESETS[props.preset] ? PRESETS[props.preset] : {};
-    return mergeConfigs(DEFAULT_CONFIG, presetConfig, props);
-  }, [props]);
-
-  const responsiveHeight = useResponsiveDimension(config.responsive, config, 'height');
-  const responsiveWidth = useResponsiveDimension(config.responsive, config, 'width');
-
-  const isVisible = useIntersectionObserver(containerRef, config.animated === 'scroll');
-
-  const blurDivs = useMemo(() => {
-    const divs = [];
-    const increment = 100 / config.divCount;
-    const currentStrength =
-      isHovered && config.hoverIntensity ? config.strength * config.hoverIntensity : config.strength;
-
-    const curveFunc = CURVE_FUNCTIONS[config.curve] || CURVE_FUNCTIONS.linear;
-
-    for (let i = 1; i <= config.divCount; i++) {
-      let progress = i / config.divCount;
-      progress = curveFunc(progress);
-
-      let blurValue;
-      if (config.exponential) {
-        blurValue = math.pow(2, progress * 4) * 0.0625 * currentStrength;
-      } else {
-        blurValue = 0.0625 * (progress * config.divCount + 1) * currentStrength;
+      function setZeros() {
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
       }
 
-      const p1 = math.round((increment * i - increment) * 10) / 10;
-      const p2 = math.round(increment * i * 10) / 10;
-      const p3 = math.round((increment * i + increment) * 10) / 10;
-      const p4 = math.round((increment * i + increment * 2) * 10) / 10;
+      function updateCountdown() {
+        const now = Date.now();
+        const distance = targetTime - now;
 
-      let gradient = `transparent ${p1}%, black ${p2}%`;
-      if (p3 <= 100) gradient += `, black ${p3}%`;
-      if (p4 <= 100) gradient += `, transparent ${p4}%`;
+        if (distance <= 0) {
+          // Event started / passed
+          setZeros();
+          if (countdownContainer && !countdownContainer.dataset.finished) {
+            // Optional: show a small message
+            const msg = document.createElement('div');
+            msg.className = 'countdown-finished';
+            msg.textContent = 'Event Dimulai!';
+            msg.style.marginTop = '10px';
+            msg.style.fontWeight = '700';
+            msg.style.color = 'var(--primary)';
+            countdownContainer.parentElement?.appendChild(msg);
+            countdownContainer.dataset.finished = 'true';
+          }
+          clearInterval(window.__ARESTA_countdown_interval);
+          return;
+        }
 
-      const direction = getGradientDirection(config.position);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
 
-      const divStyle = {
-        position: 'absolute',
-        inset: '0',
-        maskImage: `linear-gradient(${direction}, ${gradient})`,
-        WebkitMaskImage: `linear-gradient(${direction}, ${gradient})`,
-        backdropFilter: `blur(${blurValue.toFixed(3)}rem)`,
-        WebkitBackdropFilter: `blur(${blurValue.toFixed(3)}rem)`,
-        opacity: config.opacity,
-        transition:
-          config.animated && config.animated !== 'scroll'
-            ? `backdrop-filter ${config.duration} ${config.easing}`
-            : undefined
+        daysEl.textContent = String(days).padStart(2, '0');
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      // store interval id to allow clearing later if needed
+      window.__ARESTA_countdown_interval = setInterval(updateCountdown, 1000);
+    })();
+
+    /* =========================
+       Intro overlay / optional elements safe handling
+       ========================= */
+    (function handleIntro() {
+      // These elements may not exist in your HTML — handle safely
+      const introLogo = safeQuery('#introLogo');
+      const revealMask = safeQuery('#revealMask');
+      const introOverlay = safeQuery('#introOverlay');
+
+      // Mirror the behavior you wrote (but safe)
+      if (introLogo || revealMask || introOverlay) {
+        setTimeout(() => {
+          if (introLogo) introLogo.style.opacity = '0';
+          if (revealMask) {
+            revealMask.style.transition = 'opacity 0.4s ease';
+            revealMask.style.opacity = '0';
+          }
+        }, 1900);
+
+        setTimeout(() => {
+          if (introOverlay) introOverlay.classList.add('gold-slide');
+        }, 2400);
+
+        setTimeout(() => {
+          if (introOverlay && introOverlay.parentElement) introOverlay.remove();
+        }, 3200);
+      }
+    })();
+
+    /* =========================
+       Splide.js Carousel
+       ========================= */
+    (function initSplide() {
+      if (!window.Splide) return;
+      try {
+        const splide = new Splide('.splide', {
+          type: 'loop',
+          gap: '1rem',
+          padding: '1rem',
+          autoplay: true,
+          interval: 5000,
+          pauseOnHover: false,
+          perPage: 5,
+          focus: 0,
+          pagination: false,
+          breakpoints: {
+            1400: { perPage: 4 },
+            1024: { perPage: 3 },
+            768: { perPage: 1 }
+          },
+          lazyLoad: 'nearby' // if images are large, helps perf (Splide supports lazyLoad)
+        });
+
+        splide.mount();
+
+        // refresh on resize (debounced)
+        window.addEventListener('resize', debounce(() => {
+          try { splide.refresh(); } catch (e) { /* ignore */ }
+        }, 200));
+      } catch (err) {
+        // console.warn('Splide init failed', err);
+      }
+    })();
+
+    /* =========================
+       Hamburger Menu Animated + accessible
+       ========================= */
+    (function navHandler() {
+      const hamburger = safeQuery('#hamburger');
+      const navLinks = safeQuery('#navLinks');
+      const navItems = document.querySelectorAll('.nav-links a');
+
+      if (!hamburger || !navLinks) return;
+
+      // a11y attributes
+      hamburger.setAttribute('aria-controls', 'navLinks');
+      if (!hamburger.hasAttribute('aria-expanded')) hamburger.setAttribute('aria-expanded', 'false');
+
+      const openMenu = () => {
+        hamburger.classList.add('active');
+        navLinks.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+
+        // stagger animation for links
+        navItems.forEach((item, index) => {
+          item.style.animation = `fadeSlideIn 0.35s ease forwards ${index * 0.08 + 0.15}s`;
+        });
       };
 
-      divs.push(<div key={i} style={divStyle} />);
-    }
+      const closeMenu = () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        navItems.forEach(item => (item.style.animation = ''));
+      };
 
-    return divs;
-  }, [config, isHovered]);
+      hamburger.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) closeMenu(); else openMenu();
+      });
 
-  const containerStyle = useMemo(() => {
-    const isVertical = ['top', 'bottom'].includes(config.position);
-    const isHorizontal = ['left', 'right'].includes(config.position);
-    const isPageTarget = config.target === 'page';
+      // close when a link is clicked
+      navItems.forEach(item => item.addEventListener('click', closeMenu));
 
-    const baseStyle = {
-      position: isPageTarget ? 'fixed' : 'absolute',
-      pointerEvents: config.hoverIntensity ? 'auto' : 'none',
-      opacity: isVisible ? 1 : 0,
-      transition: config.animated ? `opacity ${config.duration} ${config.easing}` : undefined,
-      zIndex: isPageTarget ? config.zIndex + 100 : config.zIndex,
-      ...config.style
+      // close with Escape key for accessibility
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+
+    /* =========================
+       Loading Screen Fade Out
+       ========================= */
+    (function loader() {
+      window.addEventListener('load', () => {
+        const loader = safeQuery('#loader');
+        if (!loader) return;
+        // add fade-out class (CSS handles transition)
+        setTimeout(() => {
+          loader.classList.add('fade-out');
+          // remove from DOM after transition ends
+          loader.addEventListener('transitionend', () => {
+            loader.remove();
+          }, { once: true });
+        }, 1500);
+      });
+    })();
+
+    /* =========================
+       Time Line Section (IntersectionObserver)
+       ========================= */
+    (function timelineObserver() {
+      const items = document.querySelectorAll('.timeline-item');
+      if (!items.length || !('IntersectionObserver' in window)) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+      }, { threshold: 0.2 });
+
+      items.forEach(item => observer.observe(item));
+    })();
+
+    /* =========================
+       Lomba section: filterGrade()
+       - Supports onclick="filterGrade('SD')" (legacy)
+       - Supports onclick="filterGrade(event,'SD')" (recommended)
+       ========================= */
+    window.filterGrade = function filterGrade(a, b) {
+      // Determine signature
+      let grade;
+      let evt = null;
+
+      if (typeof a === 'string') {
+        grade = a;
+      } else if (a && typeof a === 'object') {
+        evt = a;
+        grade = b;
+      }
+
+      // Normalize
+      if (!grade) return;
+
+      const buttons = document.querySelectorAll('.grade-filter button');
+      const cards = document.querySelectorAll('.card');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      if (evt && evt.target) {
+        evt.target.classList.add('active');
+      } else {
+        // Fallback: find button whose text matches grade
+        buttons.forEach(btn => {
+          if (btn.textContent.trim().toUpperCase() === String(grade).toUpperCase()) {
+            btn.classList.add('active');
+          }
+        });
+      }
+
+      // Show/hide cards
+      cards.forEach(card => {
+        const list = (card.getAttribute('data-grade') || '').toUpperCase();
+        if (list.includes(String(grade).toUpperCase())) {
+          card.style.display = ''; // let CSS determine the layout (grid will handle)
+        } else {
+          card.style.display = 'none';
+        }
+      });
     };
 
-    if (isVertical) {
-      baseStyle.height = responsiveHeight;
-      baseStyle.width = responsiveWidth || '100%';
-      baseStyle[config.position] = 0;
-      baseStyle.left = 0;
-      baseStyle.right = 0;
-    } else if (isHorizontal) {
-      baseStyle.width = responsiveWidth || responsiveHeight;
-      baseStyle.height = '100%';
-      baseStyle[config.position] = 0;
-      baseStyle.top = 0;
-      baseStyle.bottom = 0;
-    }
+    /* =========================
+       Optional: Native Gradual Blur (non-React)
+       - attachGradualBlur(selector, options)
+       - Creates an absolute overlay with multiple blur layers
+       - Usage example (uncomment to use): attachGradualBlur('.about-content', {position:'bottom'});
+       ========================= */
+    window.attachGradualBlur = function attachGradualBlur(selector, opts = {}) {
+      const el = document.querySelector(selector);
+      if (!el) return null;
 
-    return baseStyle;
-  }, [config, responsiveHeight, responsiveWidth, isVisible]);
+      const cfg = Object.assign({
+        position: 'bottom', // top|bottom|left|right
+        height: '6rem',
+        strength: 6, // px multiplier
+        divCount: 4,
+        opacity: 0.55,
+        zIndex: 12,
+        className: 'gradual-blur-native'
+      }, opts);
 
-  const { hoverIntensity, animated, onAnimationComplete, duration } = config;
+      // ensure parent is positioned
+      const prevPos = window.getComputedStyle(el).position;
+      if (prevPos === 'static' || !prevPos) el.style.position = 'relative';
 
-  useEffect(() => {
-    if (isVisible && animated === 'scroll' && onAnimationComplete) {
-      const ms = parseFloat(duration) * 1000;
-      const t = setTimeout(() => onAnimationComplete(), ms);
-      return () => clearTimeout(t);
-    }
-  }, [isVisible, animated, onAnimationComplete, duration]);
+      const wrapper = document.createElement('div');
+      wrapper.className = cfg.className;
+      wrapper.style.position = 'absolute';
+      wrapper.style.left = '0';
+      wrapper.style.right = '0';
+      wrapper.style.height = cfg.height;
+      wrapper.style[cfg.position] = '0';
+      wrapper.style.pointerEvents = 'none';
+      wrapper.style.overflow = 'hidden';
+      wrapper.style.zIndex = String(cfg.zIndex);
 
-  return (
-    <div
-      ref={containerRef}
-      className={`gradual-blur ${config.target === 'page' ? 'gradual-blur-page' : 'gradual-blur-parent'} ${config.className}`}
-      style={containerStyle}
-      onMouseEnter={hoverIntensity ? () => setIsHovered(true) : undefined}
-      onMouseLeave={hoverIntensity ? () => setIsHovered(false) : undefined}
-    >
-      <div
-        className="gradual-blur-inner"
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%'
-        }}
-      >
-        {blurDivs}
-      </div>
-    </div>
-  );
-}
+      for (let i = 0; i < cfg.divCount; i++) {
+        const d = document.createElement('div');
+        d.style.position = 'absolute';
+        d.style.inset = '0';
+        // progressive blur
+        const p = (i + 1) / cfg.divCount;
+        const blurPx = Math.max(0.5, (cfg.strength * p)).toFixed(2);
+        d.style.backdropFilter = `blur(${blurPx}px)`;
+        d.style.WebkitBackdropFilter = `blur(${blurPx}px)`;
+        d.style.opacity = String(cfg.opacity);
+        // staggered gradient mask for softer edge
+        d.style.maskImage = `linear-gradient(${cfg.position === 'top' ? 'to bottom' : 'to top'}, rgba(0,0,0,${0.05 * (i + 1)}) 0%, rgba(0,0,0,0) 100%)`;
+        d.style.WebkitMaskImage = d.style.maskImage;
+        wrapper.appendChild(d);
+      }
 
-const GradualBlurMemo = React.memo(GradualBlur);
-GradualBlurMemo.displayName = 'GradualBlur';
-GradualBlurMemo.PRESETS = PRESETS;
-GradualBlurMemo.CURVE_FUNCTIONS = CURVE_FUNCTIONS;
-export default GradualBlurMemo;
+      el.appendChild(wrapper);
+      return wrapper;
+    };
 
-const injectStyles = () => {
-  if (typeof document === 'undefined') return;
+    // Example usage (uncomment if you want the effect immediately)
+    // attachGradualBlur('.about-content', { position: 'bottom', height: '8rem', strength: 10, divCount: 5 });
 
-  const styleId = 'gradual-blur-styles';
-  if (document.getElementById(styleId)) return;
+  }); // DOMContentLoaded end
 
-  const styleElement = document.createElement('style');
-  styleElement.id = styleId;
-  styleElement.textContent = `
-  .gradual-blur { pointer-events: none; transition: opacity 0.3s ease-out; }
-  .gradual-blur-parent { overflow: hidden; }
-  .gradual-blur-inner { pointer-events: none; }`;
-
-  document.head.appendChild(styleElement);
-};
-
-if (typeof document !== 'undefined') {
-  injectStyles();
-}
+})(); // IIFE end
