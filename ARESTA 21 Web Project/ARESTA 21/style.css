@@ -58,6 +58,7 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 img,
@@ -133,35 +134,67 @@ section {
    - Overlay ringan saat loading, dengan mask reveal
 ========================================================= */
 /* Loader Wrapper */
+/* Wrapper */
+/* === Loader Wrapper === */
 .loader-wrapper {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--bg); /* warna background loading */
+  inset: 0;
+  background: #fff;
   display: flex;
   justify-content: center;
-  text-align: center;
   align-items: center;
-  flex-direction: column;
   z-index: 9999;
   transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-/* Logo */
-.loader-logo {
-  width: 120px;
-  height: auto;
-  animation: pulse 2s infinite ease-in-out;
-  border-radius: 50%;
-  box-shadow: 0 0 30px var(--accent);
+.loader-wrapper.fade-out {
+  opacity: 0;
+  visibility: hidden;
 }
 
-/* Animasi Logo */
-@keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 15px #703df033; }
-  50% { transform: scale(1.1); box-shadow: 0 0 40px var(--accent); }
-  100% { transform: scale(1); box-shadow: 0 0 15px #703df033; }
+/* === Loader Content === */
+.loader-content {
+  position: relative;
+  width: 200px;
+  height: 200px;
 }
+
+/* === Logo Utama === */
+.loader-logo {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+}
+
+/* === Logo Glow (mengikuti bentuk logo) === */
+.loader-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(250deg)
+          saturate(500%) brightness(1.8) blur(25px);
+  opacity: 0.9;
+  transition: filter 0.2s ease, opacity 0.3s ease;
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+/* Animasi glow berdenyut */
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(250deg)
+            saturate(500%) brightness(1.8) blur(20px);
+    opacity: 0.8;
+  }
+  50% {
+    filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(290deg)
+            saturate(600%) brightness(2.2) blur(30px);
+    opacity: 1;
+  }
+}
+
 
 /* Animasi Text */
 @keyframes fadeBlink {
@@ -370,13 +403,10 @@ section {
 }
 
 .hero-logo {
-  width: clamp(100px, 18vw, 150px);
-  height: clamp(100px, 18vw, 150px);
+  width: 600px;
+  height: 280px;
   object-fit: cover;
-  border-radius: 50%;
   margin: 8px auto 6px;
-  box-shadow: var(--shadow-soft);
-  border: 6px solid #fff;
 }
 
 .hero-sub {
@@ -418,6 +448,87 @@ section {
   margin-top: 6px;
 }
 
+.banner-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #111;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container untuk mengatur posisi */
+.text-container {
+    /* Atur lebar dan tinggi agar sesuai dengan teks */
+    display: inline-block;
+    padding: 10px 20px; /* Jarak antara teks dan garis */
+    position: relative;
+    font-size: 2em;
+    color: white; /* Warna teks */
+    font-family: sans-serif;
+    /* Jaga agar garis tidak terlihat di luar container */
+    overflow: hidden; 
+}
+
+/* Garis-garis */
+.line {
+    position: absolute;
+    background-color: white; /* Warna garis */
+}
+
+/* Garis Atas dan Bawah: bergerak horizontal */
+.top, .bottom {
+    width: 0; /* Mulai dari lebar 0 */
+    height: 2px; /* Ketebalan garis */
+    animation: draw-horizontal 2s ease-in-out forwards; /* Terapkan animasi */
+}
+
+.top {
+    top: 0;
+    left: 0; /* Mulai dari kiri */
+}
+
+.bottom {
+    bottom: 0;
+    right: 0; /* Mulai dari kanan (agar animasinya "bertemu" dengan garis kiri) */
+    animation-delay: 0.5s; /* Tunda sedikit agar terlihat berurutan */
+}
+
+/* Garis Kiri dan Kanan: bergerak vertikal */
+.left, .right {
+    height: 0; /* Mulai dari tinggi 0 */
+    width: 2px; /* Ketebalan garis */
+    animation: draw-vertical 2s ease-in-out forwards; /* Terapkan animasi */
+}
+
+.left {
+    top: 0; /* Mulai dari atas */
+    left: 0;
+    animation-delay: 1s; /* Tunda lagi */
+}
+
+.right {
+    bottom: 0; /* Mulai dari bawah */
+    right: 0;
+    animation-delay: 1.5s; /* Tunda lagi */
+}
+
+/* KEYFRAMES UNTUK ANIMASI */
+/* Animasi untuk garis horizontal (Top dan Bottom) */
+@keyframes draw-horizontal {
+    to {
+        width: 100%; /* Lebarkan hingga 100% dari container */
+    }
+}
+
+/* Animasi untuk garis vertikal (Left dan Right) */
+@keyframes draw-vertical {
+    to {
+        height: 100%; /* Tinggikan hingga 100% dari container */
+    }
+}
 /* =========================================================
    7) ABOUT SECTION (card + video)
 ========================================================= */
@@ -695,7 +806,8 @@ section {
   }
 
   /* Hapus titik lingkaran */
-  .timeline-item::before {
+  .timeline-item::before,
+  .timeline-item::after {
     display: none;
   }
 
@@ -1005,5 +1117,6 @@ footer {
 }
 
 h1:hover {
-  text-shadow: 0 0 10px cyan, 0 0 20px blue; /* nyala di sekitar teks */
+  text-shadow: 0 0 10px cyan, 0 0 20px blue; 
+  transition: 1s ease-in-out;/* nyala di sekitar teks */
 }

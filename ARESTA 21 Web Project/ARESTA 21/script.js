@@ -214,20 +214,58 @@
     /* =========================
        Loading Screen Fade Out
        ========================= */
-    (function loader() {
-      window.addEventListener('load', () => {
-        const loader = safeQuery('#loader');
-        if (!loader) return;
-        // add fade-out class (CSS handles transition)
-        setTimeout(() => {
-          loader.classList.add('fade-out');
-          // remove from DOM after transition ends
-          loader.addEventListener('transitionend', () => {
-            loader.remove();
-          }, { once: true });
-        }, 1500);
-      });
-    })();
+// Helper function biar aman kalau elemen belum ada
+function safeQuery(selector) {
+  return document.querySelector(selector);
+}
+
+// === Efek Glow Interaktif ===
+const glow = safeQuery('.loader-glow');
+if (glow) {
+  document.addEventListener('mousemove', (e) => {
+    const hue = (e.clientX / window.innerWidth) * 360; // ubah warna berdasarkan posisi X
+    const brightness = 1.5 + (e.clientY / window.innerHeight); // makin ke bawah makin terang
+
+    glow.style.filter = `
+      brightness(0)
+      saturate(100%)
+      sepia(100%)
+      hue-rotate(${hue}deg)
+      saturate(600%)
+      brightness(${brightness})
+      blur(25px)
+    `;
+  });
+
+  // efek redup pelan kalau mouse berhenti
+  let timeout;
+  document.addEventListener('mousemove', () => {
+    clearTimeout(timeout);
+    glow.style.opacity = 1;
+    timeout = setTimeout(() => {
+      glow.style.opacity = 0.7;
+    }, 2000);
+  });
+}
+
+// === Loader Auto Fade-Out ===
+(function loader() {
+  window.addEventListener('load', () => {
+    const loader = safeQuery('.loader-wrapper');
+    if (!loader) return;
+
+    // setelah 1.5 detik, fade-out
+    setTimeout(() => {
+      loader.classList.add('fade-out');
+      // hapus dari DOM setelah transisi selesai
+      loader.addEventListener(
+        'transitionend',
+        () => loader.remove(),
+        { once: true }
+      );
+    }, 1500);
+  });
+})();
 
     /* =========================
        Time Line Section (IntersectionObserver)
