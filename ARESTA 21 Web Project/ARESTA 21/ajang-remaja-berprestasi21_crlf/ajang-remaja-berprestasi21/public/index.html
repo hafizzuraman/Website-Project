@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Registration</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="img/LOGO TERSIER (AJA [ada garis]).png" type="image/x-icon"/>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>AJANG REMAJA BERPRESTASI 21</h1>
+
+    <p class="lead">Isi form di bawah untuk mendaftar. Upload file (karya / dokumen) maksimal 5MB.</p>
+
+
+
+    <form id="formPendaftaran" enctype="multipart/form-data">
+
+      <label>Nama Lengkap:</label>
+
+      <input type="text" name="namaLengkap" required />
+
+
+
+      <label>Nomor Telepon:</label>
+
+      <input type="tel" name="telepon" required />
+
+
+
+      <label>Asal Sekolah:</label>
+
+      <input type="text" name="asalSekolah" required />
+
+
+
+      <label>Kategori Lomba:</label>
+
+      <select name="kategori" required>
+
+        <option value="">--Pilih Kategori--</option>
+
+        <option value="Seni">Seni</option>
+
+        <option value="Olahraga">Olahraga</option>
+
+        <option value="Akademik">Akademik</option>
+
+      </select>
+
+
+
+      <label>Upload File (jpg, png, pdf) - max 5MB:</label>
+
+      <input type="file" name="file" accept=".pdf,.jpg,.jpeg,.png" required />
+
+
+
+      <button type="submit">Kirim Pendaftaran</button>
+
+    </form>
+
+
+
+    <p id="pesan"></p>
+
+
+
+    <hr />
+
+    <h3>Untuk testing: daftar peserta (JSON)</h3>
+
+    <button id="btnLoad">Muat Daftar Peserta</button>
+
+    <pre id="jsonList" style="max-height:300px;overflow:auto;background:#f7f7f7;padding:10px;border-radius:6px;"></pre>
+
+  </div>
+
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
+
