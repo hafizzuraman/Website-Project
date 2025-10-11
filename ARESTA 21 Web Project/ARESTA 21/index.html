@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="ARESTA 21 - Ajang Remaja Berprestasi di Indonesia. Kompetisi tahunan yang mengangkat nilai kebangsaan dan inovasi pemuda." />
   <title>ARESTA 21 Official</title>
+  
   <!-- React & Babel CDN -->
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
@@ -18,7 +19,7 @@
        Fonts & Icons
   ====================== -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="img/LOGO TERSIER (AJA [ada garis]).png" type="image/x-icon"/>
 
   <!-- =====================
        CSS Libraries
@@ -75,6 +76,7 @@
       <div id="root"></div>
 
       <img src="img/LOGO TERSIER+TULISAN (HITAM).png" alt="Logo Aresta" class="hero-logo" />
+      <h2>XXI</h1>
       <p class="hero-sub pill">WE WILL BEGIN</p>
 
       <!-- Countdown -->
@@ -98,13 +100,24 @@
       </div>
     </section>
 
-    <div class="text-container">
-      <div class="line top"></div>
-      <div class="line bottom"></div>
-      <div class="line left"></div>
-      <div class="line right"></div>
-      <span class="text">INTEGRATIVE COLLABORATION</span>
+    <div class="text-loop">
+      <div class="text-track line1">
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+      </div>
+
+      <div class="text-track line2">
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+        <span>ARESTA 21 • ARESTA 21 • ARESTA 21 • ARESTA 21 •</span>
+      </div>
     </div>
+
+
+
 
     <!-- =====================
          About Section
@@ -139,7 +152,7 @@
          Event Section
     ====================== -->
     <section id="events" class="event-section">
-      <h1 class="event-title"><i>OUR EVENTS</i></h1>
+      <h1 class="event-title"><i>OUR COMPETITION</i></h1>
       <!-- Splide Slider -->
       <div class="splide" aria-label="Aresta Events" data-aos="fade-up" data-aos-duration="1000">
         <div class="splide__track">
@@ -211,48 +224,11 @@
       <div class="content">Grand Closing Aresta 20</div>
       <div class="date">1 Februari 2025</div>
     </div>
-
   </div>
 
-   <!-- lomba section -->
-
-    <h2 class="Competition-card">COMPETITION <br><small>Select Your Grade!</small></h2>
-
-  <!-- Filter -->
-<div class="grade-filter">
-      <button class="active" onclick="filterGrade('SD')">SD</button>
-    <button onclick="filterGrade('SMP')">SMP</button>
-    <button onclick="filterGrade('SMA')">SMA</button>
-    <button onclick="filterGrade('UMUM')">UMUM</button>
-  </div>
-
-  <!-- Cards -->
-  <div class="card-container">
-    <div class="card" data-grade="SD SMP SMA UMUM">
-      <img src="https://i.ibb.co/vz3Z9Xg/baca-puisi.jpg" alt="Baca Puisi">
-      <div class="buttons">
-        <a href="#" class="btn">REGISTRATION</a>
-        <a href="#" class="btn btn-blue">RULEBOOK</a>
-      </div>
-    </div>
-
-    <div class="card" data-grade="SMP SMA UMUM">
-      <img src="https://i.ibb.co/QjDLt8g/archery.jpg" alt="Archery">
-      <div class="buttons">
-        <a href="#" class="btn">REGISTRATION</a>
-        <a href="#" class="btn btn-blue">RULEBOOK</a>
-      </div>
-    </div>
-
-    <div class="card" data-grade="SD SMP SMA">
-      <img src="https://i.ibb.co/kXw4VJW/hifdzil.jpg" alt="Hifdzil Qur'an">
-      <div class="buttons">
-        <a href="#" class="btn">REGISTRATION</a>
-        <a href="#" class="btn btn-blue">RULEBOOK</a>
-      </div>
-    </div>
-  </div>
-
+    <!-- =====================
+         Sponsor Section
+    ====================== -->
     <!-- Sponsor Marquee -->
     <h1 class="event-title"><i>SPONSORS</i></h1>
     <div class="sponsor-marquee">
@@ -301,6 +277,7 @@
             Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia
           </p>
           <h4>0812-3456-7890</h4>
+          <a class="btn-copetition" href="competition.html">Registration Now!</a>
         </div>
 
         <!-- Socials -->
@@ -327,7 +304,7 @@
        Footer
   ====================== -->
   <footer>
-    <div class="footer-logo">✨ ARESTA 21 ✨</div>
+    <div class="footer-logo"><img src="img/LOGO TERSIER (AJA [ada garis]).png"></div>
     <div class="footer-copy">&copy; 2025 AcaraKeren. All rights reserved.</div>
   </footer>
 

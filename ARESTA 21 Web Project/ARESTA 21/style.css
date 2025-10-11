@@ -6,17 +6,17 @@
 ========================================================= */
 :root {
   /* Colors */
-  --bg: #ffffff;
+  --bg: #FFFEEB;
   --surface: #f8fafc;       /* latar lembut untuk blok */
   --surface-2: #eef2f7;     /* latar variasi */
   --text: #1f2937;          /* slate-800 */
   --muted: #667085;         /* abu teks sekunder */
   --heading: #0f172a;       /* slate-900 */
   --border: #e5e7eb;        /* abu garis */
-  --primary: #2a7be4;       /* biru elegan */
+  --primary: #00A2E8;       /* biru elegan */
   --primary-600: #1f65c0;   /* hover lebih gelap */
-  --accent: #7a5af8;        /* ungu lembut */
-  --success: #0ea5e9;       /* cyan aksen opsional */
+  --accent: #FFD700;        /* ungu lembut */
+  --success: #00E600;       /* cyan aksen opsional */
 
   /* Gradient Accent */
   --gradient: linear-gradient(135deg, var(--primary), var(--accent));
@@ -380,7 +380,7 @@ section {
   display: grid;
   place-content: center;
   text-align: center;
-  gap: 18px;
+  gap: 8px;
   background:
     radial-gradient(1200px 600px at 80% -10%, rgba(42, 123, 228, 0.12), transparent 60%),
     radial-gradient(1000px 500px at 10% 0%, rgba(122, 90, 248, 0.10), transparent 55%),
@@ -404,9 +404,8 @@ section {
 
 .hero-logo {
   width: 600px;
-  height: 280px;
+  height: 170px;
   object-fit: cover;
-  margin: 8px auto 6px;
 }
 
 .hero-sub {
@@ -545,15 +544,24 @@ section {
   -webkit-text-fill-color: transparent;
 }
 
+.about {
+  background: var(--bg);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  display: grid;
+  gap: 28px;
+  align-items: flex-start;
+}
 
 .about-content {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
   padding: clamp(18px, 3vw, 28px);
   max-width: 900px;
   margin-inline: auto;
+  grid-column: 1 ;
 }
 
 .about-content h2 {
@@ -570,6 +578,7 @@ section {
 /* Video embed */
 .about-video-container {
   margin-top: 26px;
+  grid-column: 2;
 }
 
 .video-wrapper {
@@ -594,6 +603,7 @@ section {
 ========================================================= */
 .event-section {
   background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 /* ====================
@@ -901,6 +911,68 @@ section {
   transform: translateY(-2px);
 }
 
+/* text-line */
+/* ===== Wadah utama ===== */
+.text-loop {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: transparent; /* warna background */
+  padding: 6rem 0;
+}
+
+/* ===== Track umum ===== */
+.text-track {
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+  display: inline-flex;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--accent);
+  line-height: 1;
+  animation: scroll 15s linear infinite;
+  will-change: transform;
+  transform-origin: center;
+  align-items: flex-end;
+}
+
+.text-track span {
+  display: inline-block;
+  padding-right: 3rem; /* jarak antar kata */
+}
+
+/* ===== Baris pertama ===== */
+.text-track.line1 {
+  top: 50%;
+  transform: translateY(-110%) rotate(2deg);
+  animation-direction: normal;
+  rotate: var(--angle, 1deg);
+  background: var(--heading);
+  z-index: 2;
+}
+
+/* ===== Baris kedua ===== */
+.text-track.line2 {
+  top: 50%;
+  transform: translateY(10%) rotate(-2deg);
+  animation-direction: reverse;
+  rotate: var(--angle, -1deg);
+  opacity: 0.8; /* sedikit transparan agar terlihat bertumpuk */
+  background: var(--heading)
+}
+
+/* ===== Animasi scroll ===== */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* =========================
    Responsive HP (max-width: 768px)
 ========================= */
@@ -987,15 +1059,17 @@ footer {
   padding: 18px var(--container-x) 26px;
   background: var(--surface);
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .footer-logo {
-  font-weight: 800;
-  font-size: 1.1rem;
+  width: 100px;
+  height: auto;
   margin-bottom: 6px;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .footer-copy {
@@ -1003,44 +1077,23 @@ footer {
   font-size: 0.95rem;
 }
 
-/* =========================================================
-   9) EXTRA: GRADUAL BLUR (opsional, dipakai di About)
-   ---------------------------------------------------------
-   - Efek blur halus di tepi, untuk konten scrollable
-   - Gunakan class "gradual-blur" di parent container
-   - Gunakan class "gradual-blur-fixed" di elemen fixed (opsional)*/
-.gradual-blur-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.footer-column a {
+  background: var(--gradient);
+  color: #fff !important;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.gradual-blur-inner > div {
-  -webkit-backdrop-filter: inherit;
-  backdrop-filter: inherit;
+.footer-column a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
-
-.gradual-blur {
-  isolation: isolate;
+.footer-column a:active {
+  transform: translateY(0);
 }
-
-@supports not (backdrop-filter: blur(1px)) {
-  .gradual-blur-inner > div {
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 0.5;
-  }
-}
-
-.gradual-blur-fixed {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 1000;
-}
-
 /* =========================================================
    10) ANIMATIONS HELPERS (dipakai JS hamburger)
 ========================================================= */
