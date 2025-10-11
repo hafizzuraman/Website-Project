@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AJANG REMAJA BERPRESTASI 21</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="img/LOGO TERSIER (AJA [ada garis]).png" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>AJANG REMAJA BERPRESTASI 21</h1>
+    <p class="lead">Isi form di bawah untuk mendaftar. Upload file (karya / dokumen) maksimal 5MB.</p>
+
+    <!-- FORM PENDAFTARAN -->
+    <form id="formPendaftaran" enctype="multipart/form-data">
+      <label>Nama Lengkap:</label>
+      <input type="text" name="nama" placeholder="Nama lengkap" required />
+
+      <label>Email:</label>
+      <input type="email" name="email" placeholder="Email aktif" required />
+
+      <label>Nomor Telepon:</label>
+      <input type="tel" name="telepon" placeholder="08xxxxxxxxxx" required />
+
+      <label>Asal Sekolah:</label>
+      <input type="text" name="sekolah" placeholder="Nama sekolah" required />
+
+      <label>Jurusan:</label>
+      <input type="text" name="jurusan" placeholder="Jurusan (jika ada)" />
+
+      <label>Kategori Lomba:</label>
+      <select name="kategori" required>
+        <option value="">-- Pilih Kategori --</option>
+        <option value="Seni">Seni</option>
+        <option value="Olahraga">Olahraga</option>
+        <option value="Akademik">Akademik</option>
+      </select>
+
+      <label>Upload File (jpg, png, pdf) - max 5MB:</label>
+      <input type="file" name="file" accept=".pdf,.jpg,.jpeg,.png" required />
+
+      <button type="submit">Kirim Pendaftaran</button>
+    </form>
+
+    <p id="pesan"></p>
+
+    <hr />
+
+    <!-- TESTING: Menampilkan data dari database -->
+    <h3>Untuk testing: daftar peserta (JSON)</h3>
+    <button id="btnLoad">Muat Daftar Peserta</button>
+    <pre id="jsonList" style="max-height:300px;overflow:auto;background:#f7f7f7;padding:10px;border-radius:6px;"></pre>
+  </div>
+
+  <script>
+    // === Kirim Data ke Server ===
+    document.getElementById("formPendaftaran").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      try {
+        const response = await fetch("http://localhost:5000/daftar", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.text();
+        document.getElementById("pesan").textContent = result;
+      } catch (error) {
+        document.getElementById("pesan").textContent = "Gagal mengirim data.";
+      }
+    });
+
+    // === Muat Data dari Database ===
+    document.getElementById("btnLoad").addEventListener("click", async () => {
+      try {
+        const response = await fetch("http://localhost:5000/peserta");
+        const data = await response.json();
+        document.getElementById("jsonList").textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById("jsonList").textContent = "Gagal memuat data peserta.";
+      }
+    });
+  </script>
+</body>
+</html>
