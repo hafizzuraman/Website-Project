@@ -11,7 +11,7 @@
     <h1>AJANG REMAJA BERPRESTASI 21</h1>
     <p class="lead">Isi form di bawah untuk mendaftar. Upload file (karya / dokumen) maksimal 5MB.</p>
 
-<form id="formPendaftaran" enctype="multipart/form-data">
+<form id="formPendaftaran" action="proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
   <label>Nama Lengkap:</label>
   <input type="text" name="namaLengkap" required />
 
@@ -22,20 +22,22 @@
   <input type="text" name="asalSekolah" required />
 
   <label>Lomba yang ingin diikuti:</label>
-  <input type="text" name="lomba" required />
-      <select name="lomba_diikuti" required>
-        <option value="">-- Pilih Lomba --</option>
-        <option value="Lomba Desain Poster">Lomba Desain Poster</option>
-        <option value="Lomba Esai">Lomba Esai</option>
-        <option value="Lomba Video Kreatif">Lomba Video Kreatif</option>
-        <option value="Lomba Fotografi">Lomba Fotografi</option>
-      </select>
+  <select name="lomba_diikuti" required>
+    <option value="">-- Pilih Lomba --</option>
+    <option value="Lomba Desain Poster">Lomba Desain Poster</option>
+    <option value="Lomba Esai">Lomba Esai</option>
+    <option value="Lomba Video Kreatif">Lomba Video Kreatif</option>
+    <option value="Lomba Fotografi">Lomba Fotografi</option>
+    <option value="Lomba Archery">Lomba Archery</option>
+    <option value="Lomba Baca Puisi">Lomba Baca Puisi</option>
+  </select>
 
   <label>Upload File (jpg, png, pdf) - max 5MB:</label>
   <input type="file" name="file" accept=".pdf,.jpg,.jpeg,.png" required />
 
   <button type="submit">Kirim Pendaftaran</button>
 </form>
+
 
 <p id="pesan"></p>
 
