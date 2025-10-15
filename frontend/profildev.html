@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Developer | ARESTA 21</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="img/LOGO TERSIER (AJA [ada garis]).png" type="image/x-icon" />
+  <style>
+    /* Tambahan ringan untuk bagian profil */
+    main {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .profil-container {
+      background: #fff;
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .profil-container h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: #0072ff;
+    }
+
+    .profil-container p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .back-btn {
+      margin-left: auto;
+      background: var(--gradient);
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 114, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <!-- =====================
+       Navbar
+  ====================== -->
+  <header class="navbar">
+    <img class="logonav" src="img/LOGO TERSIER (AJA [ada garis]).png" alt="Logo Aresta 21" />
+    <div class="logo">ARESTA 21</div>
+
+    <!-- Tombol Back -->
+    <button class="back-btn" onclick="window.location.href='index.html'">⬅ Kembali</button>
+  </header>
+
+  <!-- =====================
+       Profil Developer Section
+  ====================== -->
+  <main>
+    <section class="profil-container">
+      <h1>Profil Developer</h1>
+      <p>Halo! Saya <b>Santri Husnul Khotimah</b>, developer di balik proyek <b>ARESTA 21</b>.</p>
+      <p>Berfokus pada pembuatan tampilan web yang menarik, responsif, dan interaktif untuk mendukung acara dan kegiatan sekolah.</p>
+      <p>Terima kasih sudah mengunjungi halaman ini!</p>
+    </section>
+  </main>
+
+  <!-- =====================
+       Footer
+  ====================== -->
+  <footer>
+    <div class="footer-logo">
+      <img src="img/LOGO TERSIER (AJA [ada garis]).png" alt="Logo Footer">
+    </div>
+    <div class="footer-copy">
+      &copy; 2025 AcaraKeren. All rights reserved. 
+      <a class="profil-developer" href="profildev.html">By: Santri Husnul Khotimah</a>
+    </div>
+  </footer>
+</body>
+</html>
+<!-- =====================
+       CSS Libraries
+  ====================== -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
