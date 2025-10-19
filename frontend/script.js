@@ -329,65 +329,6 @@ if (glow) {
         }
       });
     };
-
-    /* =========================
-       Optional: Native Gradual Blur (non-React)
-       - attachGradualBlur(selector, options)
-       - Creates an absolute overlay with multiple blur layers
-       - Usage example (uncomment to use): attachGradualBlur('.about-content', {position:'bottom'});
-       ========================= */
-    window.attachGradualBlur = function attachGradualBlur(selector, opts = {}) {
-      const el = document.querySelector(selector);
-      if (!el) return null;
-
-      const cfg = Object.assign({
-        position: 'bottom', // top|bottom|left|right
-        height: '6rem',
-        strength: 6, // px multiplier
-        divCount: 4,
-        opacity: 0.55,
-        zIndex: 12,
-        className: 'gradual-blur-native'
-      }, opts);
-
-      // ensure parent is positioned
-      const prevPos = window.getComputedStyle(el).position;
-      if (prevPos === 'static' || !prevPos) el.style.position = 'relative';
-
-      const wrapper = document.createElement('div');
-      wrapper.className = cfg.className;
-      wrapper.style.position = 'absolute';
-      wrapper.style.left = '0';
-      wrapper.style.right = '0';
-      wrapper.style.height = cfg.height;
-      wrapper.style[cfg.position] = '0';
-      wrapper.style.pointerEvents = 'none';
-      wrapper.style.overflow = 'hidden';
-      wrapper.style.zIndex = String(cfg.zIndex);
-
-      for (let i = 0; i < cfg.divCount; i++) {
-        const d = document.createElement('div');
-        d.style.position = 'absolute';
-        d.style.inset = '0';
-        // progressive blur
-        const p = (i + 1) / cfg.divCount;
-        const blurPx = Math.max(0.5, (cfg.strength * p)).toFixed(2);
-        d.style.backdropFilter = `blur(${blurPx}px)`;
-        d.style.WebkitBackdropFilter = `blur(${blurPx}px)`;
-        d.style.opacity = String(cfg.opacity);
-        // staggered gradient mask for softer edge
-        d.style.maskImage = `linear-gradient(${cfg.position === 'top' ? 'to bottom' : 'to top'}, rgba(0,0,0,${0.05 * (i + 1)}) 0%, rgba(0,0,0,0) 100%)`;
-        d.style.WebkitMaskImage = d.style.maskImage;
-        wrapper.appendChild(d);
-      }
-
-      el.appendChild(wrapper);
-      return wrapper;
-    };
-
-    // Example usage (uncomment if you want the effect immediately)
-    // attachGradualBlur('.about-content', { position: 'bottom', height: '8rem', strength: 10, divCount: 5 });
-
-  }); // DOMContentLoaded end
-
-})(); // IIFE end
+  });
+})();
+      

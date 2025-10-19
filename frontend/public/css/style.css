@@ -1,37 +1,49 @@
-/* Modern clean white-blue theme */
-:root{
-  --bg:#FFFEEB;
-  --card:#fffffb;
-  --primary:#00A2E8;
-  --muted:#6b7280;
-}
-*{box-sizing:border-box}
-body{
-  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background:var(--bg);
-  margin:0;
-  display:flex;
-  min-height:100vh;
-  align-items:center;
-  justify-content:center;
-  padding:40px;
-}
-.container{
-  width:100%;
-  max-width:720px;
-  background:var(--card);
-  border-radius:12px;
-  padding:28px;
-  box-shadow:0 8px 30px rgba(11,14,26,0.06);
-}
-h1{margin:0 0 8px; text-align:center; color:#0f172a;}
-.lead{margin:0 0 18px; text-align:center; color:var(--muted);}
-label{display:block;margin-top:12px;font-weight:600;color:#111827}
-input,select{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #e6edf3;background:#fff}
-button,
-a{margin-top:18px;padding:12px 16px;border-radius:10px;border:none;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}
-button:hover,
-a:hover{opacity:0.95;box-shadow:0 4px 15px rgba(0, 0, 0, 0.3);transition:all 0.3s ease;transform: scaleY(2deg);}
-#pesan{margin-top:14px;text-align:center;font-weight:600}
-.json-list{max-height:300px;overflow:auto;background:#f7f9fc;padding:12px;border-radius:8px;border:1px solid #eef2f7}
-@media(max-width:540px){.container{padding:18px}}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: #fff;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }

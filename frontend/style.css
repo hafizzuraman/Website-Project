@@ -613,6 +613,15 @@ section {
   border: 0;
 }
 
+@media (max-width: 768px) {
+  .about {
+    grid-template-columns: 1fr;
+  }
+  .about-content,
+  .about-video-container {
+    grid-column: 1;
+  }
+}
 /* =========================================================
    8) EVENTS (Splide slider) + SPONSORS
 ========================================================= */
@@ -957,6 +966,10 @@ section {
   display: inline-block;
   padding-right: 3rem; /* jarak antar kata */
   font-family: hauser, sans-serif;
+  letter-spacing: 0.2rem;
+  user-select: none; /* biar ga bisa diseleksi */
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* ===== Baris pertama ===== */
@@ -1024,7 +1037,6 @@ o
     height: 56px;
   }
 }
-
 
 /* =========================================================
    9) CONTACT / FOOTER GRID

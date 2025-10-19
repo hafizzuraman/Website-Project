@@ -1,50 +1,130 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pendaftaran</title>
-  <link rel="stylesheet" href="public/css/style.css" />
-  <link rel="icon" href="img/LOGO TERSIER (AJA [ada garis]).png" type="image/x-icon"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pendaftaran Lomba</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f9; }
+    .container { width: 90%; max-width: 600px; background: #fff; margin: 30px auto; padding: 25px; border-radius: 10px; }
+    .hidden { display: none; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #007bff; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 20px; width: 100%; }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>AJANG REMAJA BERPRESTASI 21</h1>
-    <p class="lead">Isi form di bawah untuk mendaftar. Upload file (karya / dokumen) maksimal 5MB.</p>
+    <h2>Form Pendaftaran Lomba</h2>
 
-<form id="formPendaftaran" action="proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
-  <label>Nama Lengkap:</label>
-  <input type="text" name="namaLengkap" required />
+    <label for="jenisLomba">Lomba yang diikuti</label>
+    <select id="jenisLomba">
+      <option value="">-- Pilih Lomba --</option>
+      <option value="Kaligrafi">Kaligrafi</option>
+      <option value="MTQ">MTQ</option>
+      <option value="Cipta Baca Puisi">Cipta Baca Puisi</option>
+      <option value="Poster Digital">Poster Digital</option>
+      <option value="Video Kreatif">Video Kreatif</option>
+      <option value="Foto Grafi">Foto Grafi</option>
+      <option value="Futsal">Futsal</option>
+      <option value="Voli Ball">Voli Ball</option>
+      <option value="LCCPAI">LCCPAI</option>
+      <option value="Taqdimul Qishoh">Taqdimul Qishoh</option>
+    </select>
 
-  <label>Nomor Telepon:</label>
-  <input type="tel" name="telepon" required />
+    <!-- Form Individu -->
+   <form id="formIndividu" class="hidden" action="proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="tipe" value="individu">
 
-  <label>Asal Sekolah:</label>
-  <input type="text" name="asalSekolah" required />
+  <label>Nama Lengkap</label>
+  <input type="text" name="nama" required>
 
-  <label>Lomba yang ingin diikuti:</label>
-  <select name="lomba_diikuti" required>
-    <option value="">-- Pilih Lomba --</option>
-    <option value="Lomba Desain Poster">Lomba Desain Poster</option>
-    <option value="Lomba Esai">Lomba Esai</option>
-    <option value="Lomba Video Kreatif">Lomba Video Kreatif</option>
-    <option value="Lomba Fotografi">Lomba Fotografi</option>
-    <option value="Lomba Archery">Lomba Archery</option>
-    <option value="Lomba Baca Puisi">Lomba Baca Puisi</option>
-  </select>
+  <label>Asal Sekolah</label>
+  <input type="text" name="asal" required>
 
-  <label>Upload File (jpg, png, pdf) - max 5MB:</label>
-  <input type="file" name="file" accept=".pdf,.jpg,.jpeg,.png" required />
+  <label>Nomor HP</label>
+  <input type="text" name="hp" required>
 
-  <button type="submit">Kirim Pendaftaran</button>
-  <a href="index.html">Kembali ke Beranda</a>
+  <label>Bukti Pembayaran</label>
+  <input type="file" name="bukti" required>
+
+  <button type="submit">Kirim</button>
 </form>
 
+    <!-- Form Tim -->
+    <form id="formTim" class="hidden" action="proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="tipe" value="tim">
 
-<p id="pesan"></p>
-    <hr />
+  <label>Nama Tim</label>
+  <input type="text" name="tim" required>
 
-  <script src="/public/js/script.js"></script>
+  <label>Peserta 1</label>
+  <input type="text" name="peserta1" required>
 
+  <label>Peserta 2</label>
+  <input type="text" name="peserta2">
+  
+  <label>Peserta 3</label>
+  <input type="text" name="peserta3">
+  
+  <label>Peserta 4</label>
+  <input type="text" name="peserta4">
+
+  <div id="peserta5">
+    <label>Peserta 5</label>
+    <input type="text" name="peserta5">
+  </div>
+
+  <label>Asal Sekolah</label>
+  <input type="text" name="asal" required>
+
+  <label>Nomor HP</label>
+  <input type="text" name="hp" required>
+
+  <label>Lomba</label>
+  <select name="lomba_diikuti" required>
+    <option value="Futsal">Futsal</option>
+    <option value="Voli Ball">Voli Ball</option>
+    <option value="LCCPAI">LCCPAI</option>
+    <option value="Taqdimul Qishoh">Taqdimul Qishoh</option>
+  </select>
+
+  <label>Bukti Pembayaran</label>
+  <input type="file" name="bukti" required>
+
+  <button type="submit">Kirim</button>
+</form>
+
+  </div>
+
+  <script>
+    const jenisLomba = document.getElementById('jenisLomba');
+    const formIndividu = document.getElementById('formIndividu');
+    const formTim = document.getElementById('formTim');
+    const peserta5 = document.getElementById('peserta5');
+
+    jenisLomba.addEventListener('change', () => {
+      const value = jenisLomba.value;
+      formIndividu.classList.add('hidden');
+      formTim.classList.add('hidden');
+
+      if (value === 'Kaligrafi', 'MTQ', 'Cipta Baca Puisi', 'Poster Digital', 'Video Kreatif', 'Foto Grafi');
+      else if (value === 'LCCPAI', 'Voli Ball', 'Futsal', 'Taqdimul Qishah');
+
+      formIndividu.classList.add('hidden');
+      formTim.classList.add('hidden');
+
+        if (value === 'Kaligrafi' || value === 'MTQ' || value === 'Cipta Baca Puisi' || value === 'Poster Digital' || value === 'Video Kreatif' || value === 'Foto Grafi') {
+          formIndividu.classList.remove('hidden');
+        } else if (value === 'LCCPAI' || value === 'Voli Ball' || value === 'Futsal' || value === 'Taqdimul Qishoh') {
+          formTim.classList.remove('hidden');
+          // kalau yang dipilih "Taqdimul Qishoh", sembunyikan peserta 5
+          if (value === 'Taqdimul Qishoh') {
+            peserta5.classList.add('hidden');
+          } else {
+            peserta5.classList.remove('hidden');
+          }
+        }
+      });
+  </script>
 </body>
 </html>

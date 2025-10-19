@@ -1,32 +1,96 @@
 <?php
-include 'koneksi.php'; // menghubungkan ke database
+include 'koneksi.php'; // koneksi ke database
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $namaLengkap = $_POST['namaLengkap'];
-    $telepon = $_POST['telepon'];
-    $asalSekolah = $_POST['asalSekolah'];
-    $lomba = $_POST['lomba_diikuti'];
+    // Tentukan apakah form individu atau tim
+    $tipe = isset($_POST['tipe']) ? $_POST['tipe'] : '';
 
-    // folder penyimpanan file
+    // Folder penyimpanan file
     $targetDir = "uploads/";
     if (!is_dir($targetDir)) {
-        mkdir($targetDir, 0777, true); // buat folder jika belum ada
+        mkdir($targetDir, 0777, true); // buat folder kalau belum ada
     }
 
-    $fileName = basename($_FILES["file"]["name"]);
-    $targetFilePath = $targetDir . $fileName;
+    // Pastikan ada file yang diupload
+    if (isset($_FILES["bukti"]) && $_FILES["bukti"]["error"] === 0) {
+        $file = $_FILES["bukti"];
 
-    if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
-        $sql = "INSERT INTO pendaftaran (namaLengkap, telepon, asalSekolah, lomba_diikuti, file_path)
-                VALUES ('$namaLengkap', '$telepon', '$asalSekolah', '$lomba', '$targetFilePath')";
-        if (mysqli_query($conn, $sql)) {
-            header("Location: sukses.html");
-            exit();
+        // Cek ukuran file (maks 5MB)
+        $maxSize = 5 * 1024 * 1024;
+        if ($file["size"] > $maxSize) {
+            die("❌ Ukuran file melebihi batas maksimal 5MB.");
+        }
+
+        // Cek ekstensi file
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'pdf'];
+        $fileExt = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+        if (!in_array($fileExt, $allowedTypes)) {
+            die("❌ Format file tidak diperbolehkan. Gunakan JPG, PNG, atau PDF.");
+        }
+
+        // === FORM INDIVIDU ===
+        if ($tipe === "individu") {
+            $namaLengkap = mysqli_real_escape_string($conn, $_POST['nama']);
+            $asalSekolah = mysqli_real_escape_string($conn, $_POST['asal']);
+            $telepon     = mysqli_real_escape_string($conn, $_POST['hp']);
+            $lomba       = mysqli_real_escape_string($conn, $_POST['lomba_diikuti']);
+
+            // Buat nama file baru
+            $namaFileBaru = "bukti_" . preg_replace('/\s+/', '_', strtolower($namaLengkap)) . "." . $fileExt;
+            $targetFilePath = $targetDir . $namaFileBaru;
+
+            // Pindahkan file
+            if (move_uploaded_file($file["tmp_name"], $targetFilePath)) {
+                $sql = "INSERT INTO pendaftaran_individu 
+                        (namaLengkap, telepon, asalSekolah, lomba_diikuti, file_path)
+                        VALUES ('$namaLengkap', '$telepon', '$asalSekolah', '$lomba', '$targetFilePath')";
+            } else {
+                die("❌ Gagal memindahkan file ke folder upload.");
+            }
+
+        }
+
+        // === FORM TIM ===
+        elseif ($tipe === "tim") {
+            $namaTim = mysqli_real_escape_string($conn, $_POST['tim']);
+            $asalSekolah = mysqli_real_escape_string($conn, $_POST['asal']);
+            $telepon     = mysqli_real_escape_string($conn, $_POST['hp']);
+            $lomba       = mysqli_real_escape_string($conn, $_POST['lomba_diikuti']);
+
+            // Peserta (1–5, tergantung input)
+            $peserta1 = mysqli_real_escape_string($conn, $_POST['peserta1']);
+            $peserta2 = mysqli_real_escape_string($conn, $_POST['peserta2']);
+            $peserta3 = mysqli_real_escape_string($conn, $_POST['peserta3']);
+            $peserta4 = mysqli_real_escape_string($conn, $_POST['peserta4']);
+            $peserta5 = isset($_POST['peserta5']) ? mysqli_real_escape_string($conn, $_POST['peserta5']) : null;
+
+            // Buat nama file baru
+            $namaFileBaru = "bukti_tim_" . preg_replace('/\s+/', '_', strtolower($namaTim)) . "." . $fileExt;
+            $targetFilePath = $targetDir . $namaFileBaru;
+
+            // Pindahkan file
+            if (move_uploaded_file($file["tmp_name"], $targetFilePath)) {
+                $sql = "INSERT INTO pendaftaran_tim 
+                        (namaTim, peserta1, peserta2, peserta3, peserta4, peserta5, telepon, asalSekolah, lomba_diikuti, file_path)
+                        VALUES ('$namaTim', '$peserta1', '$peserta2', '$peserta3', '$peserta4', '$peserta5', '$telepon', '$asalSekolah', '$lomba', '$targetFilePath')";
+            } else {
+                die("❌ Gagal memindahkan file ke folder upload.");
+            }
+        }
+
+        // Eksekusi query
+        if (isset($sql)) {
+            if (mysqli_query($conn, $sql)) {
+                header("Location: sukses.html");
+                exit();
+            } else {
+                echo "❌ Gagal menyimpan data ke database: " . mysqli_error($conn);
+            }
         } else {
-            echo "Gagal menyimpan data: " . mysqli_error($conn);
+            echo "❌ Tidak ada form yang diproses.";
         }
     } else {
-        echo "Gagal mengunggah file.";
+        echo "❌ Tidak ada file yang diunggah atau terjadi error.";
     }
 }
-
+?>
