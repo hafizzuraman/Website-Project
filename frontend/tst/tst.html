@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengajuan Issue & Logo</title>
+  <link rel="stylesheet" href="tst.css" />
+</head>
+<body>
+  <div class="container">
+    <img src="acuan design.png" alt="Poster Background" class="bg-image" />
+
+    <div class="overlay">
+      <h2 class="title">Pengajuan</h2>
+      <h1 class="subtitle">Issue & Logo</h1>
+      <div class="light-glow"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const bg = document.querySelector(".bg-image");
+
+  // Efek perlahan zoom in background
+  setTimeout(() => {
+    bg.style.transform = "scale(1.1)";
+  }, 500);
+});
+
+  </script>
+</body>
+</html>

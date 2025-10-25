@@ -17,7 +17,7 @@
     <h2>Form Pendaftaran Lomba</h2>
 
   <label for="jenisLomba">Lomba yang diikuti</label>
-    <form id ="lombaForm" action="backend/proses_pendaftaran.php">
+    <form id ="lombaForm" action="../backend/" method="post" enctype="multipart/form-data">
       <select id="jenisLomba">
         <option value="">-- Pilih Lomba --</option>
         <option value="Kaligrafi">Kaligrafi</option>
@@ -25,16 +25,25 @@
         <option value="Cipta Baca Puisi">Cipta Baca Puisi</option>
         <option value="Poster Digital">Poster Digital</option>
         <option value="Video Kreatif">Video Kreatif</option>
-        <option value="Foto Grafi">Foto Grafi</option>
+        <option value="Fotografi">Fotografi</option>
         <option value="Futsal">Futsal</option>
-        <option value="Voli Ball">Voli Ball</option>
-        <option value="LCCPAI">LCCPAI</option>
+        <option value="Voli">Voli</option>
+        <option value="LCCI">LCCI</option>
         <option value="Taqdimul Qishoh">Taqdimul Qishoh</option>
+        <option value="Robotik">Robotok</option>
+        <option value="Mendongeng">Mendongeng</option>
+        <option value="Story Telling">Story Telling</option>
+        <option value="ASC">ASC</option>
+        <option value="LDBI">LDBI</option>
+        <option value="Olinpiade PAI">Olinpiade PAI</option>
+        <option value="LCC Bahasa Arab">LCC Bahasa Arab</option>
+        <option value="MHQ">MHQ</option>
+        <option value="Lodare">Lodare</option>
       </select>
     </form>
 
     <!-- Form Individu -->
-<form id="formIndividu" class="hidden" action="backend/proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
+<form id="formIndividu" class="hidden" action="../backend/" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="tipe" value="individu">
 
   <label>Nama Lengkap</label>
@@ -53,7 +62,7 @@
 </form>
 
     <!-- Form Tim -->
-<form id="formTim" class="hidden" action="backend/proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
+<form id="formTim" class="hidden" action="../backend/" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="tipe" value="tim">
 
   <label>Nama Tim</label>

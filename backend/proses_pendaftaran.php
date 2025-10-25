@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tipe = isset($_POST['tipe']) ? $_POST['tipe'] : '';
 
     // Folder penyimpanan file
-    $targetDir = "uploads/";
+    $targetDir = "backend/uploads/";
     if (!is_dir($targetDir)) {
         mkdir($targetDir, 0777, true); // buat folder kalau belum ada
     }

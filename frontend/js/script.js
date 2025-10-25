@@ -53,7 +53,7 @@
       const countdownContainer = safeQuery('#countdown');
 
       // keep your provided target date
-      const targetTime = new Date('2026-01-31T00:00:00').getTime();
+      const targetTime = new Date('2026-01-29T00:00:00').getTime();
 
       if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 
