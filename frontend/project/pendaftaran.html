@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pendaftaran Lomba</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f9; }
+    .container { width: 90%; max-width: 600px; background: #fff; margin: 30px auto; padding: 25px; border-radius: 10px; }
+    .hidden { display: none; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #007bff; color: white; padding: 10px; border: none; border-radius: 5px; margin-top: 20px; width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Form Pendaftaran Lomba</h2>
+
+ <label for="jenisLomba">Lomba yang diikuti</label>
+<form id="lombaForm" action="/ARESTA-21/kirim-pendaftaran" method="post" enctype="multipart/form-data">
+  <select id="jenisLomba" name="lomba" required>
+    <option value="">-- Pilih Lomba --</option>
+    <option value="Kaligrafi">Kaligrafi</option>
+    <option value="MTQ">MTQ</option>
+    <option value="Cipta Baca Puisi">Cipta Baca Puisi</option>
+    <option value="Poster Digital">Poster Digital</option>
+    <option value="Video Kreatif">Video Kreatif</option>
+    <option value="Fotografi">Fotografi</option>
+    <option value="Futsal">Futsal</option>
+    <option value="Voli">Voli</option>
+    <option value="LCCI">LCCI</option>
+    <option value="Taqdimul Qishoh">Taqdimul Qishoh</option>
+    <option value="Robotik">Robotok</option>
+    <option value="Mendongeng">Mendongeng</option>
+    <option value="Story Telling">Story Telling</option>
+    <option value="ASC">ASC</option>
+    <option value="LDBI">LDBI</option>
+    <option value="Olinpiade PAI">Olinpiade PAI</option>
+    <option value="LCC Bahasa Arab">LCC Bahasa Arab</option>
+    <option value="MHQ">MHQ</option>
+    <option value="Lodare">Lodare</option>
+  </select>
+</form>
+
+    <!-- Form Individu -->
+<form id="formIndividu" class="hidden" action="/ARESTA-21/kirim-pendaftaran" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="tipe" value="individu">
+  <input type="hidden" name="lomba" id="lombaIndividu">
+
+  <label>Nama Lengkap</label>
+  <input type="text" name="nama" required>
+
+  <label>Asal Sekolah</label>
+  <input type="text" name="asal" required>
+
+  <label>Nomor HP</label>
+  <input type="text" name="hp" required>
+
+  <label>Bukti Pembayaran</label>
+  <input type="file" name="bukti" required>
+
+  <button type="submit">Kirim</button>
+</form>
+
+    <!-- Form Tim -->
+<form id="formTim" class="hidden" action="/ARESTA-21/kirim-pendaftaran" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="tipe" value="tim">
+  <input type="hidden" name="lomba" id="lombaTim">
+
+  <label>Nama Tim</label>
+  <input type="text" name="tim" required>
+
+  <label>Peserta 1</label>
+  <input type="text" name="peserta1" required>
+
+  <label>Peserta 2</label>
+  <input type="text" name="peserta2">
+  
+  <label>Peserta 3</label>
+  <input type="text" name="peserta3">
+  
+  <label>Peserta 4</label>
+  <input type="text" name="peserta4">
+
+  <div id="peserta5">
+    <label>Peserta 5</label>
+    <input type="text" name="peserta5">
+  </div>
+
+  <label>Asal Sekolah</label>
+  <input type="text" name="asal" required>
+
+  <label>Nomor HP</label>
+  <input type="text" name="hp" required>
+
+  <label>Bukti Pembayaran</label>
+  <input type="file" name="bukti" required>
+
+  <button type="submit">Kirim</button>
+</form>
+
+  </div>
+
+  <script>
+    const jenisLomba = document.getElementById('jenisLomba');
+const formIndividuLomba = document.getElementById('lombaIndividu');
+const formTimLomba = document.getElementById('lombaTim');
+
+jenisLomba.addEventListener('change', () => {
+  const value = jenisLomba.value;
+
+  // kirim nilai lomba ke kedua form
+  formIndividuLomba.value = value;
+  formTimLomba.value = value;
+
+  // tampilkan form sesuai jenis lomba
+  formIndividu.classList.add('hidden');
+  formTim.classList.add('hidden');
+
+  const individuEvents = ["Kaligrafi", "MTQ", "Cipta Baca Puisi", "Poster Digital", "Video Kreatif", "Fotografi", "Mendongeng", "Story Telling", "MHQ", "ASC"];
+  const timEvents = ["Futsal", "Voli", "LCCI", "Taqdimul Qishoh", "Robotok", "LDBI", "LCC Bahasa Arab"];
+
+  if (individuEvents.includes(value)) {
+    formIndividu.classList.remove('hidden');
+  } else if (timEvents.includes(value)) {
+    formTim.classList.remove('hidden');
+  }
+});
+
+  </script>
+</body>
+</html>

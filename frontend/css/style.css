@@ -148,10 +148,14 @@ section {
   inset: 0;
   background: #fff;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;   
+  background: url("/ARESTA-21/frontend/asset/Element/background.png");   
+  height: 100vh;
   z-index: 9999;
   transition: opacity 0.8s ease, visibility 0.8s ease;
+  padding: 40px 0; /* penting biar tidak mepet */
 }
 
 .loader-wrapper.fade-out {
@@ -161,13 +165,12 @@ section {
 
 /* === Loader Content (pusatkan semua elemen) === */
 .loader-content {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem; /* jarak antara logo dan text */
-  text-align: center;
+  gap: 2.5rem;
+  
 }
 
 /* === Logo === */
@@ -178,38 +181,11 @@ section {
   height: auto;
 }
 
-.loader-glow {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 130px;
-  height: auto;
-  z-index: 1;
-  filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(250deg)
-          saturate(500%) brightness(1.8) blur(25px);
-  opacity: 0.9;
-  animation: pulseGlow 2.5s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(250deg)
-            saturate(500%) brightness(1.8) blur(20px);
-    opacity: 0.8;
-  }
-  50% {
-    filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(290deg)
-            saturate(600%) brightness(2.2) blur(30px);
-    opacity: 1;
-  }
-}
-
 /* === Text Loader (ARESTA animasi) === */
 .loader {
   --main-size: 4em;
   --text-color: #2a2a2a;
-  --shine-color: #6a00ff;
+  --shine-color: #fff;
   --shadow-color: #f0f0f0;
   display: flex;
   flex-direction: column;
@@ -222,8 +198,8 @@ section {
   font-weight: 900;
   text-transform: uppercase;
   color: var(--text-color);
-  width: 7.3em;
-  height: 1em;
+  width: 8em;
+  height: 1.5em;
   filter: drop-shadow(0 0 0.05em var(--shine-color));
 }
 
@@ -704,7 +680,6 @@ section {
 ========================================================= */
 .hero {
   min-height: calc(100vh - 72px);
-  display: grid;
   place-content: center;
   text-align: center;
   gap: 8px;
@@ -713,6 +688,13 @@ section {
     radial-gradient(1000px 500px at 10% 0%, rgba(122, 90, 248, 0.10), transparent 55%),
     var(--bg);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* rapatkan */
+  align-items: center;
+  height: 100vh; /* tetap full screen */
+  padding: 40px 0; /* kecilkan padding */
+  background: url("/ARESTA-21/frontend/asset/Element/background.png"); 
 }
 
 .hero-logo {
@@ -854,6 +836,7 @@ section {
   display: grid;
   gap: 28px;
   align-items: flex-start;
+  background: url("/ARESTA-21/frontend/asset/Element/background.png"); 
 }
 
 .about-content {
@@ -916,6 +899,7 @@ section {
 .event-section {
   background: var(--surface);
   border: 1px solid var(--border);
+  gap: 8px;
 }
 
 /* ====================
@@ -927,6 +911,7 @@ section {
   padding: 20px 0;
   width: 90%;
   max-width: 900px;
+  background: url("/ARESTA-21/frontend/asset/Element/background.png"); 
 }
 
 
@@ -1096,6 +1081,26 @@ section {
     .btn-blue:hover {
       background: #f5d100;
       color: #000 !important;
+    }
+
+    .btn-competition {
+      background: var(--gradient);
+      color: #fff !important;
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      box-shadow: var(--shadow-soft);
+      margin-top: 8px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-competition:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md); 
+    }
+
+    .btn-competition:active {
+       transform: translateY(0);
     }
 /* =========================
    Responsive Timeline (HP)
@@ -1335,24 +1340,6 @@ footer {
   color: var(--muted);
   font-size: 0.95rem;
 }
-
-.footer-column a {
-  background: var(--gradient);
-  color: #fff !important;
-  padding: 10px 16px;
-  border-radius: var(--radius);
-  font-weight: 700;
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.footer-column a:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-.footer-column a:active {
-  transform: translateY(0);
-}
 /* =========================================================
    10) ANIMATIONS HELPERS (dipakai JS hamburger)
 ========================================================= */
@@ -1426,9 +1413,4 @@ footer {
 }
 .btn-accent:active {
   transform: translateY(0);
-}
-
-h1:hover {
-  text-shadow: 0 0 10px cyan, 0 0 20px blue; 
-  transition: 1s ease-in-out;/* nyala di sekitar teks */
 }
