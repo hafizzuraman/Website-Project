@@ -1,8 +1,7 @@
 RewriteEngine On
+RewriteBase /ARESTA-21/
 
-# Jika file atau folder ada → load langsung
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Selain itu → lempar ke index.php sebagai parameter page
-RewriteRule ^(.+)$ index.php?page=$1 [L,QSA]
+RewriteRule ^(.+)$ index.php?route=$1 [L,QSA]

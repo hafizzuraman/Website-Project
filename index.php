@@ -10,7 +10,7 @@ switch ($route) {
         break;
 
     case 'pendaftaran':
-        include "./frontend/project/pendaftaraan.html";
+        include "./frontend/project/pendaftaran.html";
         break;
 
     case 'competition':

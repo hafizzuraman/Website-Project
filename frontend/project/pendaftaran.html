@@ -13,11 +13,12 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Form Pendaftaran Lomba</h2>
+
+<div class="container">
+  <h2>Form Pendaftaran Lomba</h2>
 
  <label for="jenisLomba">Lomba yang diikuti</label>
-<form id="lombaForm" action="/ARESTA-21/kirim-pendaftaran" method="post" enctype="multipart/form-data">
+<form id="lombaForm" action="/ARESTA-21/backend/database/proses_pendaftaran.php" method="post" enctype="multipart/form-data">
   <select id="jenisLomba" name="lomba" required>
     <option value="">-- Pilih Lomba --</option>
     <option value="Kaligrafi">Kaligrafi</option>
@@ -43,7 +44,7 @@
 </form>
 
     <!-- Form Individu -->
-<form id="formIndividu" class="hidden" action="/ARESTA-21/kirim-pendaftaran" method="POST" enctype="multipart/form-data">
+<form id="formIndividu" class="hidden" action="/ARESTA-21/backend/database/proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="tipe" value="individu">
   <input type="hidden" name="lomba" id="lombaIndividu">
 
@@ -63,7 +64,7 @@
 </form>
 
     <!-- Form Tim -->
-<form id="formTim" class="hidden" action="/ARESTA-21/kirim-pendaftaran" method="POST" enctype="multipart/form-data">
+<form id="formTim" class="hidden" action="/ARESTA-21/backend/database/proses_pendaftaran.php" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="tipe" value="tim">
   <input type="hidden" name="lomba" id="lombaTim">
 

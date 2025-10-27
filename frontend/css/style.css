@@ -36,7 +36,7 @@
 
 @font-face {
     font-family: 'hauser'; /* nama font bebas, nanti dipakai di font-family */
-    src: url('asset/FONT/hauser/Hauser Bold Italic.otf') format('opentype');
+    src: url('/ARESTA-21/frontend/asset/FONT/hauser/Hauser Bold Italic.otf') format('opentype');
     font-weight: normal; /* bisa juga bold */
     font-style: normal;  /* bisa italic */
 }
@@ -60,7 +60,7 @@ body {
   margin: 0;
   font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--text);
-  background: var(--bg);
+  background: url("/ARESTA-21/frontend/asset/Element/background.png") 'widht: 100%', 'height: auto' ;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -184,7 +184,7 @@ section {
 /* === Text Loader (ARESTA animasi) === */
 .loader {
   --main-size: 4em;
-  --text-color: #2a2a2a;
+  --text-color: #FFD700;
   --shine-color: #fff;
   --shadow-color: #f0f0f0;
   display: flex;
@@ -461,18 +461,16 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(32, 32, 32, 0.78);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--accent);
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 0.2px;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--border);
   display: flex;
   align-items: center;
   font-family: hauser, sans-serif;
@@ -543,8 +541,8 @@ section {
   display: block;
   padding: 10px 10px;
   border-radius: 10px;
-  color: var(--muted);
   font-weight: 600;
+  color: var(--text);
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
@@ -564,137 +562,90 @@ section {
 @media (min-width: 992px) {
   .hamburger { display: none; }
 
-  .navbar {
-    height: 76px;
-  }
+.navbar {
+  height: 76px;
+}
 
-  nav {
-    margin-left: auto;
-  }
+nav {
+  margin-left: auto;
+}
 
-  .nav-links {
-    position: static;
-    width: auto;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    padding: 0;
-    flex-direction: row;
-    gap: 22px;
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
-  }
+.nav-links {
+  position: static;
+  width: auto;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  flex-direction: row;
+  gap: 22px;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
 
-  .nav-links li a {
-    color: var(--text);
-    padding: 8px 4px;
-    border-radius: 6px;
-  }
+.nav-links li a {
+  color: var(--primary-600);
+  padding: 8px 4px;
+  border-radius: 6px;
+}
 
-  .nav-links li a:hover {
-    background: transparent;
-    color: var(--primary);
-  }
+.nav-links li a:hover {
+  background: transparent;
+  color: var(--primary);
+}
 
-  /* Underline hover halus */
-  .nav-links li a {
-    position: relative;
-  }
-  .nav-links li a::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    bottom: -6px;
-    height: 2px;
-    background: var(--gradient);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
+/* Underline hover halus */
+.nav-links li a {
+  position: relative;
+}
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
   }
   .nav-links li a:hover::after {
     transform: scaleX(1);
   }
 }
 
-/* ===== Track umum ===== */
-.text-track {
-  position: absolute;
-  left: 0;
-  white-space: nowrap;
-  display: inline-flex;
-  font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--accent);
-  line-height: 1;
-  animation: scroll 15s linear infinite;
-  will-change: transform;
-  transform-origin: center;
-  align-items: flex-end;
-}
-
-.text-track span {
-  display: inline-block;
-  padding-right: 3rem; /* jarak antar kata */
-  font-family: hauser, sans-serif;
-  letter-spacing: 0.2rem;
-  user-select: none; /* biar ga bisa diseleksi */
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* ===== Baris pertama ===== */
-.text-track.line1 {
-  top: 50%;
-  transform: translateY(-110%) rotate(2deg);
-  animation-direction: normal;
-  rotate: var(--angle, 1deg);
-  background: var(--heading);
-  z-index: 2;
-}
-
-/* ===== Baris kedua ===== */
-.text-track.line2 {
-  top: 50%;
-  transform: translateY(10%) rotate(-2deg);
-  animation-direction: reverse;
-  rotate: var(--angle, -1deg);
-  opacity: 0.8; /* sedikit transparan agar terlihat bertumpuk */
-  background: var(--heading)
-}
-
-/* ===== Animasi scroll ===== */
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
 /* =========================================================
-   5) HERO SECTION
-   ---------------------------------------------------------
-   - Light, airy, subtle gradient & dots pattern
+5) HERO SECTION
+---------------------------------------------------------
+- Light, airy, subtle gradient & dots pattern
 ========================================================= */
 .hero {
-  min-height: calc(100vh - 72px);
-  place-content: center;
-  text-align: center;
+  /* min-height: calc(100vh - 72px); */
+  display: flex;
   gap: 8px;
   background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(42, 123, 228, 0.12), transparent 60%),
-    radial-gradient(1000px 500px at 10% 0%, rgba(122, 90, 248, 0.10), transparent 55%),
-    var(--bg);
-  overflow: hidden;
+  radial-gradient(1200px 600px at 80% -10%, rgba(255, 255, 255, 0.12), transparent 40%),
+  radial-gradient(1000px 500px at 10% 0%, rgba(255, 255, 255, 0.1), transparent 45%),
+  var(--primary-600);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  flex-direction: column;
+  overflow: visible;
+  padding-bottom: 120px;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 720px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* rapatkan */
   align-items: center;
-  height: 100vh; /* tetap full screen */
-  padding: 40px 0; /* kecilkan padding */
-  background: url("/ARESTA-21/frontend/asset/Element/background.png"); 
+  place-content: center;
+  text-align: center;
 }
 
 .hero-logo {
@@ -710,7 +661,7 @@ section {
 }
 
 /* =========================================================
-   6) COUNTDOWN (card kecil, readable)
+6) COUNTDOWN (card kecil, readable)
 ========================================================= */
 .countdown-container {
   margin-top: 16px;
@@ -745,78 +696,90 @@ section {
 
 /* Container untuk mengatur posisi */
 .text-container {
-    /* Atur lebar dan tinggi agar sesuai dengan teks */
-    display: inline-block;
-    padding: 10px 20px; /* Jarak antara teks dan garis */
-    position: relative;
-    font-size: 2em;
-    color: white; /* Warna teks */
-    font-family: sans-serif;
-    /* Jaga agar garis tidak terlihat di luar container */
-    overflow: hidden; 
+  /* Atur lebar dan tinggi agar sesuai dengan teks */
+  display: inline-block;
+  padding: 10px 20px; /* Jarak antara teks dan garis */
+  position: relative;
+  font-size: 2em;
+  color: white; /* Warna teks */
+  font-family: sans-serif;
+  /* Jaga agar garis tidak terlihat di luar container */
+  overflow: hidden; 
 }
 
-/* Garis-garis */
-.line {
+/* ===== Track umum ===== */
+
+/* ===== Wadah utama ===== */
+.text-loop {
+  /* Warna transisi */
+  background: var(--heading); 
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 90px; /* tinggi pita */
+  display: flex;
+  align-items: center;
+  background: transparent; /* biar kainnya kelihatan */
+  
+  /* kuncian overlap */
+  margin-top: -40px;   /* naik ke Hero */
+  margin-bottom: -40px; /* turun ke About */
+
+  z-index: 50; /* muncul di atas konten lain */
+  pointer-events: none; /* biar tidak ganggu hover & klik */
+}
+
+.text-track {
     position: absolute;
-    background-color: white; /* Warna garis */
+  left: 0;
+  display: flex;
+  white-space: nowrap;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.4rem, 3.5vw, 2.6rem);
+  padding: 0.5rem 0;
+  animation: scroll 12s linear infinite;
+
+  /* WARNA POLICE LINE */
+  background: #F7E600; /* kuning garis polisi */
+  color: #111;
+  text-shadow: none;
+  letter-spacing: 0.1em;
 }
 
-/* Garis Atas dan Bawah: bergerak horizontal */
-.top, .bottom {
-    width: 0; /* Mulai dari lebar 0 */
-    height: 2px; /* Ketebalan garis */
-    animation: draw-horizontal 2s ease-in-out forwards; /* Terapkan animasi */
+.text-track span {
+  display: inline-block;
+  padding-right: 3rem; /* jarak antar kata */
+  font-family: hauser, sans-serif;
+  letter-spacing: 0.2rem;
+  user-select: none; /* biar ga bisa diseleksi */
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.top {
-    top: 0;
-    left: 0; /* Mulai dari kiri */
+/* ===== Baris pertama ===== */
+.text-track.line1 {
+  transform: rotate(3deg);
+  z-index: 2;
 }
 
-.bottom {
-    bottom: 0;
-    right: 0; /* Mulai dari kanan (agar animasinya "bertemu" dengan garis kiri) */
-    animation-delay: 0.5s; /* Tunda sedikit agar terlihat berurutan */
+/* ===== Baris kedua ===== */
+.text-track.line2 {
+  transform: rotate(-3deg);
+  animation-direction: reverse;
+  opacity: 0.9;
 }
 
-/* Garis Kiri dan Kanan: bergerak vertikal */
-.left, .right {
-    height: 0; /* Mulai dari tinggi 0 */
-    width: 2px; /* Ketebalan garis */
-    animation: draw-vertical 2s ease-in-out forwards; /* Terapkan animasi */
+/* ===== Animasi scroll ===== */
+@keyframes scroll {
+from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-.left {
-    top: 0; /* Mulai dari atas */
-    left: 0;
-    animation-delay: 1s; /* Tunda lagi */
-}
-
-.right {
-    bottom: 0; /* Mulai dari bawah */
-    right: 0;
-    animation-delay: 1.5s; /* Tunda lagi */
-}
-
-/* KEYFRAMES UNTUK ANIMASI */
-/* Animasi untuk garis horizontal (Top dan Bottom) */
-@keyframes draw-horizontal {
-    to {
-        width: 100%; /* Lebarkan hingga 100% dari container */
-    }
-}
-
-/* Animasi untuk garis vertikal (Left dan Right) */
-@keyframes draw-vertical {
-    to {
-        height: 100%; /* Tinggikan hingga 100% dari container */
-    }
-}
 /* =========================================================
    7) ABOUT SECTION (card + video)
 ========================================================= */
-.about .about-title,
+.about-title,
 .event-section ,
 .event-title,
 .TimeLine-h2,
@@ -836,7 +799,10 @@ section {
   display: grid;
   gap: 28px;
   align-items: flex-start;
-  background: url("/ARESTA-21/frontend/asset/Element/background.png"); 
+  z-index: 1;
+  text-align: center;
+  padding-top: 50px; /* bebas atur */
+  margin-bottom: 28px;
 }
 
 .about-content {
@@ -848,6 +814,7 @@ section {
   max-width: 900px;
   margin-inline: auto;
   grid-column: 1 ;
+  position: relative;
 }
 
 .about-content h2 {
@@ -911,7 +878,6 @@ section {
   padding: 20px 0;
   width: 90%;
   max-width: 900px;
-  background: url("/ARESTA-21/frontend/asset/Element/background.png"); 
 }
 
 
@@ -1229,15 +1195,6 @@ section {
 }
 
 /* text-line */
-/* ===== Wadah utama ===== */
-.text-loop {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  background: transparent; /* warna background */
-  padding: 6rem 0;
-}
-
 /* =========================
    Responsive HP (max-width: 768px)
 ========================= */
