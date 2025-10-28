@@ -780,7 +780,6 @@ from { transform: translateX(0); }
    7) ABOUT SECTION (card + video)
 ========================================================= */
 .about-title,
-.event-section ,
 .event-title,
 .TimeLine-h2,
 .Competition-card {
@@ -865,8 +864,8 @@ from { transform: translateX(0); }
 ========================================================= */
 .event-section {
   background: var(--surface);
-  border: 1px solid var(--border);
   gap: 8px;
+  padding: clamp(40px, 6vw, 80px) var(--container-x);
 }
 
 /* ====================

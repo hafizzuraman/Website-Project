@@ -1,18 +1,17 @@
 <?php
-require __DIR__ . '/../database/koneksi.php';
-
-
-// Ambil peserta individu
-$erk = mysqli_query($conn, "SELECT * FROM peserta ORDER BY tanggal_daftar DESC");
-?>
-<?php
 session_start();
+
+// Cek login dulu sebelum lanjut
 if(!isset($_SESSION['admin_logged'])){
     header('Location: login.php');
     exit;
 }
-?>
 
+require __DIR__ . '/../database/koneksi.php';
+
+// Ambil peserta individu
+$erk = mysqli_query($conn, "SELECT * FROM peserta ORDER BY tanggal_daftar DESC");
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -28,6 +27,7 @@ h2{margin-bottom:15px;}
 </style>
 </head>
 <body>
+
 <a href="logout.php" style="
     position: absolute;
     top: 20px;
@@ -39,6 +39,7 @@ h2{margin-bottom:15px;}
     text-decoration: none;
     font-weight: bold;
 ">Logout</a>
+
 <h2>Daftar Peserta</h2>
 <table>
 <tr>
@@ -50,13 +51,15 @@ h2{margin-bottom:15px;}
 </tr>
 <?php while($d = mysqli_fetch_assoc($erk)){ ?>
 <tr>
-<td><?php echo $d['nama']; ?></td>
-<td><?php echo $d['asal']; ?></td>
-<td><?php echo $d['hp']; ?></td>
-<td><a href="uploads/<?php echo $d['bukti']; ?>" target="_blank">Lihat</a></td>
+<td><?php echo htmlspecialchars($d['nama']); ?></td>
+<td><?php echo htmlspecialchars($d['asal']); ?></td>
+<td><?php echo htmlspecialchars($d['hp']); ?></td>
+<td><a href="uploads/<?php echo urlencode($d['bukti']); ?>" target="_blank">Lihat</a></td>
 <td><?php echo $d['tanggal_daftar']; ?></td>
 </tr>
 <?php } ?>
 </table>
+
 </body>
 </html>
+

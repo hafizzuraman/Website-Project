@@ -37,10 +37,6 @@ switch ($route) {
 
 
     // API / PROSES FORM
-    case 'kirim-pendaftaran':
-        include "backend/database/proses_pendaftaran.php";
-        break;
-
     case 'cek-login':
         include "backend/project/cek_login.php";
         break;

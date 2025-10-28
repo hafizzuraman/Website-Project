@@ -59,7 +59,7 @@ if ($tipe === 'individu') {
 }
 
 // Redirect ke halaman sukses
-header("Location: /frontend/project/sukses.html");
+header("Location: ../index.php?route=sukses");
 exit;
 // Kirim notifikasi WhatsApp
 header("Location: ../kirim_wa.php?nama=$nama&asal=$asal&hp=$hp&lomba=$lomba");
