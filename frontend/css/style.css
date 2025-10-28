@@ -67,6 +67,17 @@ body {
   overflow-x: hidden;
 }
 
+.body_competition {
+  margin: 0;
+  font-family: 'hauser', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: url("/ARESTA-21/frontend/asset/Element/background.png") 'widht: 100%', 'height: auto' ;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
 img,
 svg,
 video,
@@ -200,6 +211,7 @@ section {
   color: var(--text-color);
   width: 8em;
   height: 1.5em;
+  font-family: 'hauser', sans-serif;
   filter: drop-shadow(0 0 0.05em var(--shine-color));
 }
 
@@ -542,7 +554,8 @@ section {
   padding: 10px 10px;
   border-radius: 10px;
   font-weight: 600;
-  color: var(--text);
+  color: #fff;
+  text-decoration: none;
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
@@ -658,6 +671,9 @@ nav {
   margin-top: 6px;
   align-items: center;
   text-align: center;
+  color: var(--border);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-family: 'hauser', sans-serif;
 }
 
 /* =========================================================
@@ -722,10 +738,10 @@ nav {
   background: transparent; /* biar kainnya kelihatan */
   
   /* kuncian overlap */
-  margin-top: -40px;   /* naik ke Hero */
-  margin-bottom: -40px; /* turun ke About */
+  margin-top: -40px;   
+  margin-bottom: -40px;
 
-  z-index: 50; /* muncul di atas konten lain */
+  z-index: 100; /* muncul di atas konten lain */
   pointer-events: none; /* biar tidak ganggu hover & klik */
 }
 
@@ -863,7 +879,7 @@ from { transform: translateX(0); }
    8) EVENTS (Splide slider) + SPONSORS
 ========================================================= */
 .event-section {
-  background: var(--surface);
+  background: var(--primary-600);
   gap: 8px;
   padding: clamp(40px, 6vw, 80px) var(--container-x);
 }
@@ -1055,7 +1071,10 @@ from { transform: translateX(0); }
       border-radius: var(--radius);
       font-weight: 700;
       box-shadow: var(--shadow-soft);
-      margin-top: 8px;
+      margin-top: 13px;
+      text-align: center;
+      display: inline-block;
+      align-items: center;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 

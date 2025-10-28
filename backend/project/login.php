@@ -12,6 +12,7 @@ if(isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true){
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/ARESTA-21/frontend/asset/LOGO/LOGO UTAMA.png" type="image/x-icon" />
 <title>Login Admin</title>
 <style>
 body{background:#f4f6f9;font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh;}

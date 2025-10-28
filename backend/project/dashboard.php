@@ -17,6 +17,7 @@ $erk = mysqli_query($conn, "SELECT * FROM peserta ORDER BY tanggal_daftar DESC")
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/ARESTA-21/frontend/asset/LOGO/LOGO UTAMA.png" type="image/x-icon" />
 <title>Dashboard Admin</title>
 <style>
 body{font-family:Arial;background:#f4f6f9;padding:20px;}

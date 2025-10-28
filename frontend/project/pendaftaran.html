@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/ARESTA-21/frontend/asset/LOGO/LOGO UTAMA.png" type="image/x-icon" />
   <title>Form Pendaftaran Lomba</title>
   <style>
     body { font-family: Arial, sans-serif; background: #f4f6f9; }
@@ -16,7 +17,6 @@
 
 <div class="container">
   <h2>Form Pendaftaran Lomba</h2>
-
  <label for="jenisLomba">Lomba yang diikuti</label>
 <form id="lombaForm" action="/ARESTA-21/backend/database/proses_pendaftaran.php" method="post" enctype="multipart/form-data">
   <select id="jenisLomba" name="lomba" required>
@@ -99,8 +99,7 @@
 
   <button type="submit">Kirim</button>
 </form>
-
-  </div>
+</div>
 
   <script>
     const jenisLomba = document.getElementById('jenisLomba');
