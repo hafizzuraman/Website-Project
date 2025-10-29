@@ -20,18 +20,31 @@
 
   /* Gradient Accent */
   --gradient: linear-gradient(135deg, var(--primary), var(--accent));
-
   /* Shadows & Radius */
   --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.12);
   --shadow-bold: 0 15px 40px rgba(0, 0, 0, 0.16);
   --shadow-hover: 0 6px 14px rgba(0, 0, 0, 0.08);
   --radius-sm: 10px;
-  --radius: 14px;
+  --radius: 16px;
   --radius-lg: 18px;
 
   /* Spacing scale */
   --container-x: clamp(16px, 5vw, 80px);
+  --font-size-base: clamp(1.5rem, 4vw, 3rem);
+
+  /* z-index */
+  --z-base: 1;
+  --z-loop: 50;
+  --z-navbar: 100;
+  --z-loader: 1000;
+
+  --tape-yellow: #f2c300;
+  --tape-black: #111;
+  --stripe-width: 40px;
+  --tape-height: 80px;
+  --speed: 16s;
+  --font-size: 1.3rem;
 }
 
 @font-face {
@@ -60,18 +73,7 @@ body {
   margin: 0;
   font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--text);
-  background: url("/ARESTA-21/frontend/asset/Element/background.png") 'widht: 100%', 'height: auto' ;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-.body_competition {
-  margin: 0;
-  font-family: 'hauser', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  color: var(--text);
-  background: url("/ARESTA-21/frontend/asset/Element/background.png") 'widht: 100%', 'height: auto' ;
+  background-image: url("/ARESTA-21/frontend/asset/Element/background.png") 'widht: 100%', 'height: auto' ;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -634,17 +636,16 @@ nav {
 - Light, airy, subtle gradient & dots pattern
 ========================================================= */
 .hero {
-  /* min-height: calc(100vh - 72px); */
   display: flex;
   gap: 8px;
   background:
-  radial-gradient(1200px 600px at 80% -10%, rgba(255, 255, 255, 0.12), transparent 40%),
-  radial-gradient(1000px 500px at 10% 0%, rgba(255, 255, 255, 0.1), transparent 45%),
-  var(--primary-600);
+    radial-gradient(1200px 600px at 80% -10%, rgba(255, 255, 255, 0.12), transparent 40%),
+    radial-gradient(1000px 500px at 10% 0%, rgba(255, 255, 255, 0.1), transparent 45%),
+    var(--primary-600);
   align-items: center;
   justify-content: center;
   text-align: center;
-  position: relative;
+  position: relative; /* penting agar .text-loop bisa absolute */
   flex-direction: column;
   overflow: visible;
   padding-bottom: 120px;
@@ -709,42 +710,112 @@ nav {
   margin-top: 6px;
 }
 
-
-/* Container untuk mengatur posisi */
-.text-container {
-  /* Atur lebar dan tinggi agar sesuai dengan teks */
-  display: inline-block;
-  padding: 10px 20px; /* Jarak antara teks dan garis */
+/* ==============================
+   PEMBATAS ANTAR SECTION (DOUBLE)
+============================== */
+.section-divider.double {
   position: relative;
-  font-size: 2em;
-  color: white; /* Warna teks */
-  font-family: sans-serif;
-  /* Jaga agar garis tidak terlihat di luar container */
-  overflow: hidden; 
-}
-
-/* ===== Track umum ===== */
-
-/* ===== Wadah utama ===== */
-.text-loop {
-  /* Warna transisi */
-  background: var(--heading); 
-  width: 100%;
+  height: 180px; /* tinggi area transisi */
   overflow: hidden;
-  position: relative;
-  height: 90px; /* tinggi pita */
-  display: flex;
-  align-items: center;
-  background: transparent; /* biar kainnya kelihatan */
-  
-  /* kuncian overlap */
-  margin-top: -40px;   
-  margin-bottom: -40px;
-
-  z-index: 100; /* muncul di atas konten lain */
-  pointer-events: none; /* biar tidak ganggu hover & klik */
+  z-index: 5;
+  background: transparent;
 }
 
+/* ==============================
+   PITA POLICE LINE DASAR
+============================== */
+.text-loop.tape {
+  position: absolute;
+  left: -15%;
+  width: 130%;
+  height: var(--tape-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--tape-yellow) 0 var(--stripe-width),
+    var(--tape-black) var(--stripe-width) calc(var(--stripe-width) * 2)
+  );
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  border-top: 3px solid var(--tape-black);
+  border-bottom: 3px solid var(--tape-black);
+}
+
+/* Tape 1 miring ke kiri atas */
+.tape-1 {
+  top: 20%;
+  transform: rotate(-5deg);
+  animation-delay: 0s;
+  z-index: 3;
+}
+
+/* Tape 2 miring ke kanan bawah */
+.tape-2 {
+  top: 55%;
+  transform: rotate(5deg);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--tape-yellow) 0 var(--stripe-width),
+    var(--tape-black) var(--stripe-width) calc(var(--stripe-width) * 2)
+  );
+  z-index: 2;
+}
+
+/* ==============================
+   TEKS BERGERAK
+============================== */
+.text-track {
+  display: flex;
+  white-space: nowrap;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: var(--font-size);
+  color: #fff;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.text-track.line1 {
+  animation: moveLeft var(--speed) linear infinite;
+}
+.text-track.line2 {
+  animation: moveRight var(--speed) linear infinite;
+  opacity: 0.85;
+}
+
+.text-track span {
+  padding-right: 3rem;
+}
+
+/* ==============================
+   ANIMASI
+============================== */
+@keyframes moveLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes moveRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 768px) {
+  :root {
+    --tape-height: 60px;
+    --stripe-width: 26px;
+    --font-size: 1rem;
+  }
+  .section-divider.double {
+    height: 120px;
+  }
+  .tape-1 { top: 25%; transform: rotate(-4deg); }
+  .tape-2 { top: 60%; transform: rotate(4deg); }
+}
 .text-track {
     position: absolute;
   left: 0;
@@ -815,8 +886,9 @@ from { transform: translateX(0); }
   gap: 28px;
   align-items: flex-start;
   z-index: 1;
+  position: relative;
   text-align: center;
-  padding-top: 50px; /* bebas atur */
+  padding-top: 100px; /* tambah dikit biar ga ketimpa text-loop */
   margin-bottom: 28px;
 }
 
@@ -884,6 +956,28 @@ from { transform: translateX(0); }
   padding: clamp(40px, 6vw, 80px) var(--container-x);
 }
 
+.btn-competition {
+  background: var(--gradient);
+  color: #fff !important;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+  margin-top: 13px;
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-competition:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md); 
+}
+
+.btn-competition:active {
+   transform: translateY(0);
+}
 /* ====================
    TIMELINE SECTION
 ==================== */
@@ -963,129 +1057,6 @@ from { transform: translateX(0); }
   left: -10px;
 }
 
-/* Kotak event */
-.content {
-  display: inline-block;
-  background: var(--gradient);
-  color: var(--surface);
-  padding: 12px 22px;
-  border-radius: 8px;
-  font-weight: bold;
-  box-shadow: 0 4px 15px var(--shadow-soft);
-}
-
-/* Tanggal event */
-.date {
-  margin-top: 5px;
-  font-size: 0.9em;
-  color: var(--muted);
-}
-
-/* ====================
-   lomba section
-==================== */
-
-    /* === Button Filter === */
-    .grade-filter {
-      text-align: center;
-      margin: 15px 0 40px;
-    }
-
-    .grade-filter button {
-      background: #fff;
-      box-shadow: var(--shadow-soft);
-      padding: 8px 16px;
-      border-radius: 8px;
-      margin: 0 6px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .grade-filter button.active {
-      background: #f5d100;
-      color: #000;
-    }
-
-    /* === Cards === */
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      padding: 0 40px 60px;
-    }
-
-    .card {
-      background: var(--surface);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
-    }
-
-    .card img {
-      width: 100%;
-      display: block;
-    }
-
-    .card .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      padding: 15px;
-    }
-
-    .card .btn {
-      background: #fff;
-      color: var(--gradient);
-      padding: 8px 14px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: 0.3s;
-      text-decoration: none;
-    }
-
-    .card .btn:hover {
-      background: #f5d100;
-    }
-
-    .btn-blue {
-      background: #0c3b9c;
-      color: #000000 !important;
-    }
-
-    .btn-blue:hover {
-      background: #f5d100;
-      color: #000 !important;
-    }
-
-    .btn-competition {
-      background: var(--gradient);
-      color: #fff !important;
-      padding: 10px 16px;
-      border-radius: var(--radius);
-      font-weight: 700;
-      box-shadow: var(--shadow-soft);
-      margin-top: 13px;
-      text-align: center;
-      display: inline-block;
-      align-items: center;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .btn-competition:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md); 
-    }
-
-    .btn-competition:active {
-       transform: translateY(0);
-    }
 /* =========================
    Responsive Timeline (HP)
 ========================= */
@@ -1227,7 +1198,7 @@ from { transform: translateX(0); }
   .splide__slide img {
     width: 100%;
     height: 100%; /* biar proporsional tapi bentuk sama */
-    max-height: 260px; /* jaga proporsi biar gak kepanjangan */
+    /* max-height: 260px; jaga proporsi biar gak kepanjangan */
   }
 
   /* Arrow & dots biarin sama aja, ga usah dikecilin */
