@@ -53,6 +53,7 @@
     font-weight: normal; /* bisa juga bold */
     font-style: normal;  /* bisa italic */
 }
+
 /* =========================================================
    2) RESET & BASE
    ---------------------------------------------------------
@@ -154,8 +155,6 @@ section {
    - Overlay ringan saat loading, dengan mask reveal
 ========================================================= */
 /* Loader Wrapper */
-/* Wrapper */
-/* === Loader Wrapper === */
 .loader-wrapper {
   position: fixed;
   inset: 0;
@@ -176,17 +175,16 @@ section {
   visibility: hidden;
 }
 
-/* === Loader Content (pusatkan semua elemen) === */
+/* Loader Content (pusatkan semua elemen) */
 .loader-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
-  
 }
 
-/* === Logo === */
+/* Logo */
 .loader-logo {
   position: relative;
   z-index: 2;
@@ -194,7 +192,7 @@ section {
   height: auto;
 }
 
-/* === Text Loader (ARESTA animasi) === */
+/* Text Loader (ARESTA animasi) */
 .loader {
   --main-size: 4em;
   --text-color: #FFD700;
@@ -216,7 +214,6 @@ section {
   font-family: 'hauser', sans-serif;
   filter: drop-shadow(0 0 0.05em var(--shine-color));
 }
-
 
 .loader .text {
   display: flex;
@@ -447,19 +444,6 @@ section {
   }
 }
 
-
-/* Animasi Text */
-@keyframes fadeBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-/* Setelah selesai loading */
-.loader-wrapper.fade-out {
-  opacity: 0;
-  visibility: hidden;
-}
-
 /* =========================================================
    4) NAVBAR (sticky, translucent, accessible)
    ---------------------------------------------------------
@@ -556,7 +540,7 @@ section {
   padding: 10px 10px;
   border-radius: 10px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text);
   text-decoration: none;
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
@@ -600,7 +584,7 @@ nav {
 }
 
 .nav-links li a {
-  color: var(--primary-600);
+  color: var(--border);
   padding: 8px 4px;
   border-radius: 6px;
 }
@@ -716,9 +700,9 @@ nav {
 .section-divider.double {
   position: relative;
   height: 180px; /* tinggi area transisi */
-  overflow: hidden;
   z-index: 5;
-  background: transparent;
+  background: var(--primary-600);
+  overflow: visible;
 }
 
 /* ==============================
@@ -760,6 +744,7 @@ nav {
     var(--tape-black) var(--stripe-width) calc(var(--stripe-width) * 2)
   );
   z-index: 2;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* ==============================
@@ -879,7 +864,7 @@ from { transform: translateX(0); }
 }
 
 .about {
-  background: var(--bg);
+  background: var(--primary-600);
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   display: grid;
@@ -889,7 +874,6 @@ from { transform: translateX(0); }
   position: relative;
   text-align: center;
   padding-top: 100px; /* tambah dikit biar ga ketimpa text-loop */
-  margin-bottom: 28px;
 }
 
 .about-content {
