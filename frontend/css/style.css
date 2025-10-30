@@ -42,7 +42,7 @@
   --tape-yellow: #f2c300;
   --tape-black: #111;
   --stripe-width: 40px;
-  --tape-height: 80px;
+  --tape-height: 40px;
   --speed: 16s;
   --font-size: 1.3rem;
 }
@@ -156,7 +156,7 @@ section {
 ========================================================= */
 /* Loader Wrapper */
 .loader-wrapper {
-  position: fixed;
+  position: fixed !important;
   inset: 0;
   background: #fff;
   display: flex;
@@ -192,6 +192,32 @@ section {
   height: auto;
 }
 
+/* ===== FIX Loader Responsiveness for Mobile ===== */
+@media (max-width: 768px) {
+  .loader-wrapper {
+    padding: 0 !important;
+    background-size: cover;
+    background-position: center;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .loader-content {
+    gap: 1.5rem !important;
+    transform: none !important;
+    text-align: center;
+  }
+
+  .loader-logo {
+    width: 90px !important;
+    height: auto !important;
+  }
+
+  .loader {
+    font-size: 2rem !important;
+    text-align: center;
+  }
+}
 /* Text Loader (ARESTA animasi) */
 .loader {
   --main-size: 4em;
@@ -831,13 +857,14 @@ nav {
 
 /* ===== Baris pertama ===== */
 .text-track.line1 {
-  transform: rotate(3deg);
+  transform: rotate(4deg);
   z-index: 2;
+  box-shadow: var(--shadow-md);
 }
 
 /* ===== Baris kedua ===== */
 .text-track.line2 {
-  transform: rotate(-3deg);
+  transform: rotate(-4deg);
   animation-direction: reverse;
   opacity: 0.9;
 }
@@ -963,121 +990,151 @@ from { transform: translateX(0); }
    transform: translateY(0);
 }
 /* ====================
-   TIMELINE SECTION
+   ACOMODATION SECTION
 ==================== */
+.acomodation-section {
+  background: var(--primary-600);
+  padding: clamp(40px, 6vw, 80px) var(--container-x);
+  text-align: justify;
+  justify-content: center;
+}
+.acomodation-section h2 {
+  margin-bottom: 28px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   TIMELINE SECTION
+   ---------------------------------------------------------
+   - Struktur timeline kiri-kanan (desktop)
+   - Jadi 1 kolom rapi di HP
+   - Animasi smooth saat muncul
+========================================================= */
+
+.timeline-section {
+  background: var(--primary-600);
+  padding: clamp(40px, 6vw, 80px) var(--container-x);
+}
+
+/* ======================
+   Garis Tengah Timeline
+====================== */
 .timeline {
   position: relative;
   margin: 50px auto;
   padding: 20px 0;
   width: 90%;
   max-width: 900px;
+  gap: 8px;
 }
 
-
-/* Garis tengah timeline */
 .timeline::before {
   content: '';
   position: absolute;
-  width: 4px;
-  background: var(--heading);
   top: 0;
   bottom: 0;
   left: 50%;
+  width: 4px;
+  background: var(--heading);
   transform: translateX(-50%);
 }
 
-/* Item timeline */
+/* ======================
+   Item Timeline (Default)
+====================== */
 .timeline-item {
   position: relative;
   width: 50%;
   padding: 20px 40px;
   box-sizing: border-box;
+  background: var(--gradient);
+  color: var(--surface);
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
   opacity: 0;
   transition: all 0.8s ease-out;
 }
 
-/* Item kiri */
+/* ======================
+   Posisi Item (Desktop)
+====================== */
 .timeline-item.left {
   left: 0;
   text-align: right;
-  transform: translateX(-80px); /* animasi masuk dari kiri */
+  transform: translateX(-80px);
 }
 
-/* Item kanan */
 .timeline-item.right {
   left: 50%;
   text-align: left;
-  transform: translateX(80px); /* animasi masuk dari kanan */
+  transform: translateX(80px);
 }
 
-/* Animasi saat tampil */
+/* Saat Muncul di Viewport */
 .timeline-item.show {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Titik bulat di garis timeline */
+/* Titik Lingkaran */
 .timeline-item::after {
   content: '';
   position: absolute;
+  top: 30px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  z-index: 1;
   background: gold;
-  top: 30px;
-  z-index: 1;
+  border: 3px solid var(--heading);
   box-shadow: 0 0 10px rgba(255,255,255,0.6);
-  border: 3px solid var(--heading); /* biar jelas warna lingkarannya */
+  z-index: 1;
 }
 
-/* Posisi titik di kiri */
 .timeline-item.left::after {
   right: -10px;
 }
 
-/* Posisi titik di kanan */
 .timeline-item.right::after {
   left: -10px;
 }
 
-/* =========================
-   Responsive Timeline (HP)
-========================= */
+/* =========================================================
+   RESPONSIVE (HP & Tablet)
+========================================================= */
 @media (max-width: 768px) {
   .timeline {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* jarak antar box */
-    align-items: stretch; /* biar semua box full lebar */
-    position: relative;
+    align-items: stretch;
+    gap: 20px;
   }
 
-  /* Hapus garis tengah */
+  /* Hilangkan garis tengah & titik */
   .timeline::before,
-  .timeline::after {
-    display: none;
-  }
-
-  /* Setiap box item */
-  .timeline-item {
-    width: 100%; /* full lebar container */
-    text-align: left; /* rata kiri */
-    padding: 20px;
-    background: var(--gradient);
-    color: var(--surface);
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-  }
-
-  /* Hapus titik lingkaran */
-  .timeline-item::before,
   .timeline-item::after {
     display: none;
   }
 
-  /* Biar konten rapi */
+  .timeline-item {
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    transform: none;
+    opacity: 1;
+  }
+
+  /* Reset posisi kiri/kanan */
+  .timeline-item.left,
+  .timeline-item.right {
+    left: 0;
+    transform: none;
+    text-align: left;
+  }
+
+  /* Elemen dalam */
   .timeline-item .content {
     font-weight: 600;
     margin-bottom: 8px;
@@ -1087,15 +1144,9 @@ from { transform: translateX(0); }
     font-size: 14px;
     color: #f1f1f1;
   }
-
-  /* Reset class left & right */
-  .timeline-item.left,
-  .timeline-item.right {
-    left: 0;
-    transform: none;
-    text-align: left;
-  }
 }
+/* =========================================================
+   SPLIDE SLIDER CUSTOMIZATION + SPONSOR MARQUEE
 
 
 

@@ -70,15 +70,21 @@ ol {
   list-style: none;
 }
 
-body {
+/* ============================================
+   FIX: Loader responsiveness issue on mobile
+============================================ */
+html, body {
+  height: 100%;
+  width: 100%;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   font-family: 'hauser', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--text);
-  background: url("/ARESTA-21/frontend/asset/Element/background.png") 'widht: 100%', 'height: auto' ;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  background: var(--primary-600);
 }
 
 /* Utility: kontainer & section spacing */
@@ -93,45 +99,25 @@ section {
    ---------------------------------------------------------
    - Overlay ringan saat loading, dengan mask reveal
 ========================================================= */
-/* Loader Wrapper */
-/* Wrapper */
-/* === Loader Wrapper === */
+/* Pastikan loader tidak terpengaruh hero/section lain */
 .loader-wrapper {
-  position: fixed;
-  inset: 0;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  
-  align-items: center;   
-  background: url("/ARESTA-21/frontend/asset/Element/background.png");   
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw;
   height: 100vh;
-  z-index: 9999;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  background: url("/ARESTA-21/frontend/asset/Element/background.png");   
+  z-index: 999999 !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: none !important;
   padding: 40px 0; /* penting biar tidak mepet */
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
 .loader-wrapper.fade-out {
   opacity: 0;
   visibility: hidden;
-}
-
-/* === Loader Content (pusatkan semua elemen) === */
-.loader-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-  
-}
-
-/* === Logo === */
-.loader-logo {
-  position: relative;
-  z-index: 2;
-  width: 130px;
-  height: auto;
 }
 
 /* === Text Loader (ARESTA animasi) === */
@@ -400,6 +386,50 @@ section {
   visibility: hidden;
 }
 
+/* === Loader Content (pusatkan semua elemen) === */
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  
+}
+
+/* === Logo === */
+.loader-logo {
+  position: relative;
+  z-index: 2;
+  width: 130px;
+  height: auto;
+}
+
+/* ===== FIX Loader Responsiveness for Mobile ===== */
+@media (max-width: 768px) {
+  .loader-wrapper {
+    padding: 0 !important;
+    background-size: cover;
+    background-position: center;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .loader-content {
+    gap: 1.5rem !important;
+    transform: none !important;
+    text-align: center;
+  }
+
+  .loader-logo {
+    width: 90px !important;
+    height: auto !important;
+  }
+
+  .loader {
+    font-size: 2rem !important;
+    text-align: center;
+  }
+}
 /* =========================================================
    4) NAVBAR (sticky, translucent, accessible)
    ---------------------------------------------------------
@@ -442,6 +472,7 @@ section {
   flex-direction: column;
   gap: 6px;
   padding: 8px;
+  cursor: pointer;
   margin-left: auto;
 }
 
