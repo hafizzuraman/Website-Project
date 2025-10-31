@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             );
 
             if ($stmt->execute()) {
-                echo "<script>window.location.href='/ARESTA-21/frontend/project/sukses.html';</script>";
+                include "../index.php?route=sukses";
             } else {
                 echo "<script>alert('Gagal menyimpan data ke database!');</script>";
             }

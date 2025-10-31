@@ -1,9 +1,3 @@
-// script.js (reworked for plain HTML project)
-// - Compatible with the HTML you provided (no React, no imports)
-// - Defensive: checks for lib availability (Typed, Splide)
-// - Accessible hamburger (aria-expanded), Escape to close
-// - filterGrade supports both onclick="filterGrade('SD')" and onclick="filterGrade(event,'SD')"
-
 (() => {
   'use strict';
 
@@ -20,20 +14,79 @@
 
   /* ---------- DOM Ready ---------- */
   document.addEventListener('DOMContentLoaded', () => {
+    // Fungsi untuk menyembunyikan loader
+    const hideLoader = () => {
+      const loader = safeQuery('#loader');
+      if (loader) {
+        loader.style.transition = 'opacity 0.5s ease-out';
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 500);
+      }
+    };
+
+    // Sembunyikan loader setelah DOM siap (simulasi 2 detik)
+    setTimeout(hideLoader, 2000);
+
+    // Callback setelah loading selesai (untuk memulai komponen lain)
+    setTimeout(() => {
+      try {
+        initCountdown();
+        handleIntro();
+        initSplide();
+        navHandler();
+        timelineObserver();
+        // filterGrade sudah global, tidak perlu dipanggil di sini
+      } catch (error) {
+        console.error('Error initializing components:', error);
+      }
+    }, 2500); // Mulai setelah loading + buffer 500ms
+
+    // Contoh penggunaan debounce: Tangani event resize window (gabungkan untuk semua kebutuhan)
+    const handleResize = () => {
+      console.log('Window resized!');
+      const body = safeQuery('body');
+      if (body) {
+        // Perbaikan: Gunakan clamp untuk font-size yang lebih stabil, hindari perubahan drastis
+        const fontSize = Math.max(14, Math.min(20, window.innerWidth / 50));
+        body.style.fontSize = `${fontSize}px`;
+      }
+      // Refresh Splide jika ada
+      if (window.Splide && window.splideInstance) {
+        try {
+          window.splideInstance.refresh();
+        } catch (e) {
+          console.warn('Splide refresh failed:', e);
+        }
+      }
+    };
+
+    // Tambahkan satu event listener resize dengan debounce
+    window.addEventListener('resize', debounce(handleResize, 200));
+
     /* =========================
        Countdown Timer
        ========================= */
-    (function initCountdown() {
+    function initCountdown() {
       const daysEl = safeQuery('#days');
       const hoursEl = safeQuery('#hours');
       const minutesEl = safeQuery('#minutes');
       const secondsEl = safeQuery('#seconds');
       const countdownContainer = safeQuery('#countdown');
 
-      // keep your provided target date
-      const targetTime = new Date('2026-01-29T00:00:00').getTime();
+      // Perbaikan: Pastikan targetTime valid
+      const targetTimeStr = '2026-01-29T00:00:00';
+      const targetTime = new Date(targetTimeStr).getTime();
+      if (isNaN(targetTime)) {
+        console.error('Invalid target time for countdown:', targetTimeStr);
+        return;
+      }
 
-      if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+      if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+        console.warn('Countdown elements not found');
+        return;
+      }
 
       function setZeros() {
         daysEl.textContent = '00';
@@ -47,10 +100,8 @@
         const distance = targetTime - now;
 
         if (distance <= 0) {
-          // Event started / passed
           setZeros();
           if (countdownContainer && !countdownContainer.dataset.finished) {
-            // Optional: show a small message
             const msg = document.createElement('div');
             msg.className = 'countdown-finished';
             msg.textContent = 'Event Dimulai!';
@@ -76,44 +127,49 @@
       }
 
       updateCountdown();
-      // store interval id to allow clearing later if needed
       window.__ARESTA_countdown_interval = setInterval(updateCountdown, 1000);
-    })();
+    }
 
     /* =========================
-       Intro overlay / optional elements safe handling
+       Intro Overlay
        ========================= */
-    (function handleIntro() {
-      // These elements may not exist in your HTML — handle safely
+    function handleIntro() {
       const introLogo = safeQuery('#introLogo');
       const revealMask = safeQuery('#revealMask');
       const introOverlay = safeQuery('#introOverlay');
 
-      // Mirror the behavior you wrote (but safe)
-      if (introLogo || revealMask || introOverlay) {
-        setTimeout(() => {
-          if (introLogo) introLogo.style.opacity = '0';
-          if (revealMask) {
-            revealMask.style.transition = 'opacity 0.4s ease';
-            revealMask.style.opacity = '0';
-          }
-        }, 1900);
+      if (!introLogo && !revealMask && !introOverlay) return; // Perbaikan: Jika tidak ada elemen, skip
 
-        setTimeout(() => {
-          if (introOverlay) introOverlay.classList.add('gold-slide');
-        }, 2400);
+      setTimeout(() => {
+        if (introLogo) introLogo.style.opacity = '0';
+        if (revealMask) {
+          revealMask.style.transition = 'opacity 0.4s ease';
+          revealMask.style.opacity = '0';
+        }
+      }, 1900);
 
-        setTimeout(() => {
-          if (introOverlay && introOverlay.parentElement) introOverlay.remove();
-        }, 3200);
-      }
-    })();
+      setTimeout(() => {
+        if (introOverlay) introOverlay.classList.add('gold-slide');
+      }, 2400);
+
+      setTimeout(() => {
+        if (introOverlay && introOverlay.parentElement) introOverlay.remove();
+      }, 3200);
+    }
 
     /* =========================
        Splide.js Carousel
        ========================= */
-    (function initSplide() {
-      if (!window.Splide) return;
+    function initSplide() {
+      if (!window.Splide) {
+        console.warn('Splide library not loaded');
+        return;
+      }
+      const splideEl = safeQuery('.splide');
+      if (!splideEl) {
+        console.warn('Splide element not found');
+        return;
+      }
       try {
         const splide = new Splide('.splide', {
           type: 'loop',
@@ -131,31 +187,29 @@
             768: { perPage: 3, gap: '0.5rem' },
             480: { perPage: 2, gap: '0.5rem' }
           },
-          lazyLoad: 'nearby' // if images are large, helps perf (Splide supports lazyLoad)
+          lazyLoad: 'nearby'
         });
 
         splide.mount();
-
-        // refresh on resize (debounced)
-        window.addEventListener('resize', debounce(() => {
-          try { splide.refresh(); } catch (e) { /* ignore */ }
-        }, 200));
+        window.splideInstance = splide; // Simpan instance untuk refresh di resize
       } catch (err) {
-        // console.warn('Splide init failed', err);
+        console.warn('Splide init failed:', err);
       }
-    })();
+    }
 
     /* =========================
-       Hamburger Menu Animated + accessible
+       Hamburger Menu
        ========================= */
-    (function navHandler() {
+    function navHandler() {
       const hamburger = safeQuery('#hamburger');
       const navLinks = safeQuery('#navLinks');
       const navItems = document.querySelectorAll('.nav-links a');
 
-      if (!hamburger || !navLinks) return;
+      if (!hamburger || !navLinks) {
+        console.warn('Hamburger or navLinks not found');
+        return;
+      }
 
-      // a11y attributes
       hamburger.setAttribute('aria-controls', 'navLinks');
       if (!hamburger.hasAttribute('aria-expanded')) hamburger.setAttribute('aria-expanded', 'false');
 
@@ -163,8 +217,6 @@
         hamburger.classList.add('active');
         navLinks.classList.add('open');
         hamburger.setAttribute('aria-expanded', 'true');
-
-        // stagger animation for links
         navItems.forEach((item, index) => {
           item.style.animation = `fadeSlideIn 0.35s ease forwards ${index * 0.08 + 0.15}s`;
         });
@@ -181,22 +233,26 @@
         if (navLinks.classList.contains('open')) closeMenu(); else openMenu();
       });
 
-      // close when a link is clicked
       navItems.forEach(item => item.addEventListener('click', closeMenu));
 
-      // close with Escape key for accessibility
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeMenu();
       });
-    })();
-
+    }
 
     /* =========================
-       Time Line Section (IntersectionObserver)
+       Timeline Section
        ========================= */
-    (function timelineObserver() {
+    function timelineObserver() {
       const items = document.querySelectorAll('.timeline-item');
-      if (!items.length || !('IntersectionObserver' in window)) return;
+      if (!items.length) {
+        console.warn('No timeline items found');
+        return;
+      }
+      if (!('IntersectionObserver' in window)) {
+        console.warn('IntersectionObserver not supported');
+        return;
+      }
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -205,15 +261,12 @@
       }, { threshold: 0.2 });
 
       items.forEach(item => observer.observe(item));
-    })();
+    }
 
     /* =========================
-       Lomba section: filterGrade()
-       - Supports onclick="filterGrade('SD')" (legacy)
-       - Supports onclick="filterGrade(event,'SD')" (recommended)
+       Filter Grade (Global Function)
        ========================= */
     window.filterGrade = function filterGrade(a, b) {
-      // Determine signature
       let grade;
       let evt = null;
 
@@ -224,18 +277,24 @@
         grade = b;
       }
 
-      // Normalize
-      if (!grade) return;
+      if (!grade) {
+        console.warn('No grade provided to filterGrade');
+        return;
+      }
 
       const buttons = document.querySelectorAll('.grade-filter button');
       const cards = document.querySelectorAll('.card');
+
+      if (!buttons.length || !cards.length) {
+        console.warn('Filter buttons or cards not found');
+        return;
+      }
 
       buttons.forEach(btn => btn.classList.remove('active'));
 
       if (evt && evt.target) {
         evt.target.classList.add('active');
       } else {
-        // Fallback: find button whose text matches grade
         buttons.forEach(btn => {
           if (btn.textContent.trim().toUpperCase() === String(grade).toUpperCase()) {
             btn.classList.add('active');
@@ -243,11 +302,10 @@
         });
       }
 
-      // Show/hide cards
       cards.forEach(card => {
         const list = (card.getAttribute('data-grade') || '').toUpperCase();
         if (list.includes(String(grade).toUpperCase())) {
-          card.style.display = ''; // let CSS determine the layout (grid will handle)
+          card.style.display = '';
         } else {
           card.style.display = 'none';
         }
@@ -255,4 +313,3 @@
     };
   });
 })();
-      

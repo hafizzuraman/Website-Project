@@ -10,93 +10,196 @@ include "../database/koneksi.php";
   <link rel="icon" href="/ARESTA-21/frontend/asset/LOGO/LOGO UTAMA.png" type="image/x-icon"/>
   <title>Dashboard Panitia Lomba</title>
   <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f9fafb;
-      padding: 40px;
-      color: #333;
-    }
+   /* ========== RESET ========== */
 
-    h1 {
-      text-align: center;
-      color: #222;
-      margin-bottom: 30px;
-    }
+  @font-face {
+    font-family: 'hauser'; /* nama font bebas, nanti dipakai di font-family */
+    src: url('/ARESTA-21/frontend/asset/FONT/hauser/Hauser Bold Italic.otf') format('opentype');
+    font-weight: normal; /* bisa juga bold */
+    font-style: normal;  /* bisa italic */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-    .table-container {
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      margin-bottom: 50px;
-    }
+body {
+  background: #0f172a;
+  color: #f8fafc;
+  min-height: 100vh;
+  padding: 20px 40px;
+}
 
-    table {
+/* ========== LOGOUT BUTTON ========== */
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  background: linear-gradient(90deg, #ef4444, #f87171);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* ========== PAGE TITLE ========== */
+h1 {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  color: #e2e8f0;
+  font-family: 'hauser', sans-serif;
+}
+
+/* ========== TABLE SECTION ========== */
+.table-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 40px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== TYPE TITLE & SEARCH BOX ========== */
+.type-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'hauser', sans-serif;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.search-box label {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f8fafc;
+  font-size: 14px;
+  width: 200px;
+}
+
+.search-box input::placeholder {
+  color: #cbd5e1;
+}
+
+/* ========== TABLE STYLE ========== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background: linear-gradient(90deg, #6366f1, #06b6d4);
+  color: #fff;
+}
+
+thead th {
+  padding: 12px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+td {
+  padding: 10px 12px;
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 820px) {
+  body {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-top: 70px;
+  }
+
+  .search-box input {
+    width: 140px;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody, tr, td {
+    display: block;
     width: 100%;
-    border-collapse: collapse;
-    table-layout: auto; /* biar kolom nyesuai isi */
-    }
+  }
 
-    td, th {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    white-space: normal; /* biar teks bisa turun baris */
-    word-wrap: break-word; /* pecah nomor panjang */
-    }
+  tr {
+    margin-bottom: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 10px;
+  }
 
-    th {
-      background: #007bff;
-      color: white;
-      font-weight: 600;
-    }
+  td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
 
-    tr:hover {
-      background-color: #f1f5ff;
-    }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: 600;
+    color: #94a3b8;
+  }
+}
 
-    img.bukti {
-      width: 80px;
-      height: auto;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    .type-title {
-      font-size: 20px;
-      margin-top: 40px;
-      color: #007bff;
-      border-left: 4px solid #007bff;
-      padding-left: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .search-box {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .search-box input, .search-box select {
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    .search-box label {
-      font-weight: 500;
-    }
-
-    .no-data {
-      color: #888;
-      text-align: center;
-      padding: 15px;
-    }
   </style>
 </head>
 <body>
+  <a href="logout.php" class="logout-btn">Logout</a> 
   <h1>📋 Dashboard Panitia Lomba ARESTA-21</h1>
 
   <!-- ================= INDIVIDU ================= -->
@@ -194,12 +297,12 @@ include "../database/koneksi.php";
                     <td>{$row['nama_tim']}</td>
                     <td>{$anggotaList}</td>
                     <td>{$row['asal_sekolah']}</td>
-                    <td>{$row['no_hp']}</td>
+                    <td>{$row['no_wa_ketua']}</td>
                     <td>{$row['kategori_lomba']}</td>
                     <td>";
-            if ($row['bukti_pembayaran']) {
-              echo "<a href='{$row['bukti_pembayaran']}' target='_blank'>
-                      <img src='{$row['bukti_pembayaran']}' class='bukti' alt='Bukti Pembayaran'>
+            if ($row['berkas_pendaftaran']) {
+              echo "<a href='{$row['berkas_pendaftaran']}' target='_blank'>
+                      <img src='{$row['berkas_pendaftaran']}' class='bukti' alt='Bukti Pembayaran'>
                     </a>";
             } else {
               echo "<span class='no-data'>Tidak ada file</span>";

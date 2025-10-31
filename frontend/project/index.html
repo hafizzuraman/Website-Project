@@ -18,9 +18,9 @@
   <!-- =====================
        CSS Libraries
   ====================== -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/ARESTA-21/frontend/css/style.css">
+
 </head>
 
 <body>
@@ -33,18 +33,19 @@
     <img src="/ARESTA-21/frontend/asset/LOGO/LOGO UTAMA.png" alt="Logo Aresta" class="loader-logo" />
   </div>
   <!-- From Uiverse.io by andrew-manzyk --> 
-  <div class="loader">
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="text"><span>ARESTA 21</span></div>
-    <div class="line"></div>
-  </div>
+<div class="loader">
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="text"><span>ARESTA 21</span></div>
+  <div class="line"></div>
+</div>
+
 </div>
 
   <!-- =====================
@@ -63,7 +64,8 @@
         <li><a href="#hero">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#events">Events</a></li>
-        <li><a href="#timeline-section">Time Line</a></li>
+        <li><a href="#penginapan">Penginapan</a></li>
+        <li><a href="#timeline">Time line</a></li>
         <li><a href="#kontak">Contact</a></li>
       </ul>
     </nav>
@@ -101,6 +103,7 @@
 
     </section>
     
+
 <!-- ====== TRANSISI DOUBLE POLICE LINE ====== -->
 <div class="section-divider double">
   <!-- Tape 1 -->
@@ -136,7 +139,6 @@
   </div>
 </div>
 
-
     
     <!-- =====================
          About Section
@@ -144,7 +146,7 @@
     <section id="about" class="about">
       <h1 class="about-title"><i>ABOUT ARESTA 21</i></h1>
 
-      <div class="about-content" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
+      <div class="about-content">
         <h2>ABOUT ARESTA 21</h2>
         <p>
           <b>ARESTA</b> merupakan akronim dari Ajang Remaja Berprestasi, sebuah mahakarya yang dipersembahkan oleh Organisasi Santri Husnul Khotimah Kuningan.
@@ -157,7 +159,7 @@
         </p>
       </div>
 
-        <div class="about-video-container" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+        <div class="about-video-container">
           <div class="video-wrapper">
             <video class="about-video" autoplay muted loop playsinline style="width:100%; height:100%; object-fit: cover;">
               <source src="/ARESTA-21/frontend/asset/video/Please Stand By.mp4" type="video/mp4">
@@ -172,7 +174,7 @@
     ====================== -->
     <section id="events" class="event-section">
       <h1 class="event-title"><i>OUR COMPETITION</i></h1>
-      <div class="splide" aria-label="Aresta Events" data-aos="fade-up" data-aos-duration="1000">
+      <div class="splide" aria-label="Aresta Events">
         <div class="splide__track">
           <ul class="splide__list">
             <li class="splide__slide"><img src="/ARESTA-21/frontend/asset/poster lomba/Cipta Baca Puisi.png" alt="Cipta Baca Puisi" /></li>
@@ -189,16 +191,16 @@
           </ul>
         </div>
       </div>
-      <div class="btn-competition" data-aos="fade-up">
+      <div class="btn-competition">
         <a href="/ARESTA-21/frontend/project/competition.html">Registration Now!</a>
       </div>
     </section>
      <!-- =====================
          Penginapan Section
     ====================== -->
-    <section class="accommodation-section">
-      <h1 class="event-title"><i>ACCOMMODATION</i></h1>
-      <div class="accommodation-content" data-aos="fade-up" data-aos-duration="1000">
+    <section class="accommodation-section" id="penginapan">
+      <h1 class="event-title"><i>PENGINAPAN</i></h1>
+      <div class="accommodation-content">
         <p>
           Untuk peserta yang berasal dari luar kota, kami menyediakan fasilitas penginapan di Pondok Pesantren Husnul Khotimah Kuningan.
           Penginapan ini dirancang untuk memberikan kenyamanan dan keamanan selama mengikuti rangkaian acara ARESTA 21.
@@ -208,56 +210,53 @@
           Kami berharap dengan adanya fasilitas penginapan ini, peserta dapat fokus dan menikmati pengalaman berharga selama mengikuti ARESTA 21.
         </p>
       </div>
-      <div class="accommodation-image" data-aos="fade-up" data-aos-duration="1000">
-        <a href="#">Butuh Penginapan?, Klik Disini!</a>
+      <div  class="btn-competition">
+        <a href="#">Ajukan permohonan</a>
+        <a href="#">Ketentuan</a>
       </div>
     </section>
     
     <!-- =====================
          Timeline Section
     ====================== -->
-    <section class="timeline-section">
+    <section class="timeline-section" id="timeline">
       <h2 class="TimeLine-h2"><i>TIME LINE</i></h2>
       <div class="timeline">
         <div class="timeline-item left">
-          <div class="content">Open Registration Aresta 20</div>
-          <div class="date">24 November 2024</div>
+          <div class="content">OPEN REGISTRATION ARESTA 21</div>
+          <div class="date">1 November 2025</div>
         </div>
         <div class="timeline-item right">
-          <div class="content">Close Registration Aresta 20</div>
-          <div class="date">17 Januari 2025</div>
+          <div class="content">TECHNICAL MEETING LOMBA VIDEO CREATIVE, FOTOGRAFI, POSTER DIGITAL</div>
+          <div class="date">20 Desember 2025</div>
         </div>
         <div class="timeline-item left">
-          <div class="content">Technical Meeting Lomba LKBB</div>
-          <div class="date">14 Januari 2025</div>
+          <div class="content">PENGUMPULAN KARYA SELEKSI LOMBA + CLOSE REGISTRATION LOMBA FOTOGRAFI, POSTER DIGITAL, VIDEO CREATIVE, MTQ, TAQDIMUL QISHOH, CIPTA BACA PUISI</div>
+          <div class="date">3 Januari 2026</div>
         </div>
         <div class="timeline-item right">
-          <div class="content">Technical Meeting Lomba</div>
-          <div class="date">18 - 19 Januari 2025</div>
+          <div class="content">⁠CLOSE REGISTRATION LOMBA KALIGRAFI, LCCI, FUTSAL, VOLI, SCOUT RAYA</div>
+          <div class="date">10 Januari 2026</div>
         </div>
         <div class="timeline-item left">
-          <div class="content">Lomba Futsal</div>
-          <div class="date">24 - 25 Januari 2025</div>
+          <div class="content"> ⁠TECHNICAL MEETING</div>
+          <div class="date">17 - 18 Januari 2026</div>
         </div>
         <div class="timeline-item right">
-          <div class="content">Lomba Pioneering</div>
-          <div class="date">26 Januari 2025</div>
+          <div class="content">⁠PELAKSANAAN LOMBA FUTSAL & VOLI</div>
+          <div class="date">22 - 25 Januari 2026</div>
         </div>
         <div class="timeline-item left">
-          <div class="content">Lomba LKBB</div>
-          <div class="date">27 Januari 2025</div>
+          <div class="content">⁠SELEKSI ONLINE LCCI</div>
+          <div class="date">24 Januari 2026</div>
         </div>
         <div class="timeline-item right">
-          <div class="content">Grand Opening Aresta 20</div>
-          <div class="date">30 Januari 2025</div>
+          <div class="content">GRAND OPENING ARESTA 21</div>
+          <div class="date">29 Januari 2026</div>
         </div>
         <div class="timeline-item left">
-          <div class="content">Day 2 Aresta 20</div>
-          <div class="date">31 Januari 2025</div>
-        </div>
-        <div class="timeline-item right">
-          <div class="content">Grand Closing Aresta 20</div>
-          <div class="date">1 Februari 2025</div>
+          <div class="content">⁠GRAND CLOSING ARESTA 21</div>
+          <div class="date">31 Januari 2026</div>
         </div>
       </div>
     </section>
@@ -285,6 +284,13 @@
           <img src="https://cdn.simpleicons.org/instagram" alt="Instagram" class="sponsor-logo" />
           <img src="https://cdn.simpleicons.org/spotify" alt="Spotify" class="sponsor-logo" />
           <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" class="sponsor-logo" />
+          <img src="https://cdn.simpleicons.org/facebook" alt="Facebook" class="sponsor-logo" />
+          <img src="https://cdn.simpleicons.org/youtube" alt="YouTube" class="sponsor-logo" />
+          <img src="https://cdn.simpleicons.org/apple" alt="Apple" class="sponsor-logo" />
+          <img src="https://cdn.simpleicons.org/x" alt="Twitter/X" class="sponsor-logo" />
+          <img src="https://cdn.simpleicons.org/instagram" alt="Instagram" class="sponsor-logo" />
+          <img src="https://cdn.simpleicons.org/spotify" alt="Spotify" class="sponsor-logo" />
+          <img src="https://cdn.simpleicons.org/netflix" alt="Netflix" class="sponsor-logo" />
         </div>
       </div>
     </section>
@@ -292,7 +298,7 @@
     <!-- =====================
          Contact Section
     ====================== -->
-    <section id="kontak" class="contact-section" data-aos="fade-up">
+    <section id="kontak" class="contact-section">
       <div class="footer-container">
         <div class="footer-column" style="text-align: left;">
           <h3>Pondok Pesantren Husnul Khotimah</h3>
@@ -300,7 +306,7 @@
             Jl. Manis Kidul-Sayana No.84, Maniskidul,<br />
             Kec. Jalaksana, Kabupaten Kuningan, Jawa Barat 45554, Indonesia
           </p>
-          <h4>0812-3456-7890</h4>
+          <h4>contact person: +62851-8843-2800</h4>
         </div>
 
         <div class="footer-column" style="text-align: center;">
@@ -326,24 +332,27 @@
       <img src="/ARESTA-21/frontend/asset/LOGO/LOGO UTAMA.png" alt="Logo Aresta" />
     </div>
     <div class="footer-copy">
-      &copy; ARESTA 21 2026. All rights reserved.
+      &copy; ARESTA 21 2026. OSHK 30. All rights reserved. 
     </div>
   </footer>
 
   <!-- =====================
-       JavaScript Libraries
-  ====================== -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+      JavaScript Libraries
+  ===================== -->
   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script src="/ARESTA-21/frontend/js/script.js"></script>
 
   <script>
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true
+    // Inisialisasi AOS
+    document.addEventListener("DOMContentLoaded", function () {
+      AOS.init({
+        duration: 1000,       // durasi animasi (ms)
+        easing: "ease-in-out", // efek animasi
+        once: true,           // animasi hanya sekali muncul
+        mirror: false,        // tidak animasi saat scroll balik
+      });
     });
   </script>
+
 </body>
 </html>

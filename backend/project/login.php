@@ -15,10 +15,105 @@ if(isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true){
 <link rel="icon" href="/ARESTA-21/frontend/asset/LOGO/LOGO UTAMA.png" type="image/x-icon" />
 <title>Login Admin</title>
 <style>
-body{background:#f4f6f9;font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh;}
-form{background:white;padding:25px;border-radius:10px;width:300px;box-shadow:0 0 10px rgba(0,0,0,0.1);} 
-input{width:100%;padding:8px;margin-top:10px;border:1px solid #ccc;border-radius:5px;}
-button{margin-top:15px;width:100%;padding:10px;background:#007bff;border:none;border-radius:5px;color:white;}
+/* ====== GLOBAL RESET ====== */
+@font-face {
+    font-family: 'hauser'; /* nama font bebas, nanti dipakai di font-family */
+    src: url('/ARESTA-21/frontend/asset/FONT/hauser/Hauser Bold Italic.otf') format('opentype');
+    font-weight: normal; /* bisa juga bold */
+    font-style: normal;  /* bisa italic */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ====== BODY STYLE ====== */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #f8fafc;
+}
+
+/* ====== LOGIN FORM CONTAINER ====== */
+form {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ====== TITLE ====== */
+form h3 {
+  margin-bottom: 8px;
+  font-size: 22px;
+  color: #e2e8f0;
+  letter-spacing: 0.5px;
+  font-family: 'hauser', sans-serif;
+}
+
+/* ====== INPUTS ====== */
+form input {
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+form input::placeholder {
+  color: #cbd5e1;
+}
+
+form input:focus {
+  border-color: #6366f1;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ====== BUTTON ====== */
+form button {
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #6366f1, #06b6d4);
+  color: #f1f5f9;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 480px) {
+  form {
+    width: 90%;
+    padding: 32px 24px;
+  }
+
+  form h3 {
+    font-size: 20px;
+  }
+}
+
 </style>
 </head>
 <body>

@@ -21,6 +21,31 @@
   /* ---------- DOM Ready ---------- */
   document.addEventListener('DOMContentLoaded', () => {
 
+
+     // Fungsi untuk menyembunyikan loader
+    const hideLoader = () => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.transition = 'opacity 0.5s ease-out';
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 500);
+      }
+    };
+
+    // Sembunyikan loader setelah DOM siap (simulasi 2 detik)
+    setTimeout(hideLoader, 2000);
+
+    // Callback setelah loading selesai (untuk memulai komponen lain)
+    setTimeout(() => {
+      handleIntro();
+      initSplide();
+      navHandler();
+      timelineObserver();
+      // filterGrade sudah global, tidak perlu dipanggil di sini
+    }, 2500); // Mulai setelah loading + buffer 500ms
+
     /* =========================
        Intro overlay / optional elements safe handling
        ========================= */

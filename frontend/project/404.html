@@ -1,11 +1,221 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>404 — Halaman Tidak Ditemukan</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#8b5cf6;
+      --muted:#9aa6b2;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #061221 0%, #071427 60%);
+      color:#e6eef6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    .card{
+      width:100%;
+      max-width:960px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:24px;
+      align-items:center;
+    }
+
+    /* responsif: satu kolom pada layar kecil */
+    @media (max-width:820px){
+      .card{grid-template-columns: 1fr; padding:20px}
+    }
+
+    .left{
+      padding:12px 6px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      background:linear-gradient(90deg, rgba(139,92,246,0.15), rgba(59,130,246,0.08));
+      color:var(--accent);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:13px;
+      margin-bottom:16px;
+    }
+
+    h1{
+      font-size:clamp(36px, 5vw, 56px);
+      line-height:1;
+      margin:0 0 12px 0;
+      letter-spacing:-1px;
+    }
+    p.lead{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size:16px;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.04);
+      background:var(--glass);
+      color:inherit;
+      transition: transform .14s ease, box-shadow .14s ease;
+    }
+    .btn:hover{ transform:translateY(-4px); box-shadow:0 10px 30px rgba(11,18,32,0.5) }
+
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent), #06b6d4);
+      color:#04142a;
+      border: none;
+    }
+
+    .search{
+      display:flex;
+      gap:8px;
+      margin-top:12px;
+      max-width:480px;
+    }
+    .search input{
+      flex:1;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.04);
+      background:transparent;
+      color:inherit;
+      outline:none;
+    }
+
+    /* kanan: ilustrasi */
+    .illustration{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+    }
+    .scene{
+      width:100%;
+      max-width:360px;
+      height:auto;
+      display:block;
+    }
+
+    footer.note{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* small playful twinkle */
+    .twinkle{
+      position:relative;
+      display:inline-block;
+    }
+    .twinkle::after{
+      content:"";
+      position:absolute;
+      width:6px;height:6px;border-radius:50%;
+      right:-10px;top:-12px;
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.6) 30%, transparent 60%);
+      opacity:0.9;
+      transform:scale(.9);
+      animation: pulse 2.6s infinite ease-in-out;
+    }
+    @keyframes pulse{
+      0%{transform:scale(.8);opacity:.9}
+      50%{transform:scale(1.4);opacity:.5}
+      100%{transform:scale(.8);opacity:.9}
+    }
+  </style>
 </head>
 <body>
-    
+  <main class="card" role="main" aria-labelledby="title">
+    <div class="left">
+      <span class="eyebrow">404 — Gak ketemu</span>
+      <h1 id="title"><span class="twinkle">Halaman</span> Tidak Ditemukan</h1>
+      <p class="lead">Waduh, halaman yang kamu cari kayaknya hilang atau dipindah. Mungkin link-nya salah ketik atau udah gak dipakai lagi.</p>
+
+      <div class="actions" role="navigation" aria-label="Tindakan cepat">
+        <a class="btn btn-primary" href="/" title="Kembali ke beranda">🏠 Kembali ke Beranda</a>
+        <a class="btn" href="javascript:history.back()" title="Kembali ke halaman sebelumnya">🔙 Kembali</a>
+        <a class="btn" href="/sitemap.xml" title="Buka sitemap">🗺️ Sitemap</a>
+      </div>
+
+      <form class="search" action="/" method="get" role="search" aria-label="Cari situs">
+        <input type="search" name="q" placeholder="Cari di situs ini..." aria-label="Cari di situs ini" />
+        <button class="btn" type="submit" aria-label="Mulai pencarian">🔎</button>
+      </form>
+
+      <p class="note">Kalau terus nemu error ini, kabarin admin supaya bisa cek server atau routing.</p>
+    </div>
+
+    <div class="illustration" aria-hidden="true">
+      <!-- Ilustrasi SVG sederhana — boleh diganti -->
+      <svg class="scene" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="#06b6d4" stop-opacity="0.9"/>
+          </linearGradient>
+        </defs>
+
+        <rect x="0" y="0" width="600" height="400" rx="20" fill="url(#g1)" opacity="0.06"/>
+
+        <!-- robot/mascot -->
+        <g transform="translate(80,30) scale(1)">
+          <rect x="160" y="90" width="180" height="140" rx="20" fill="#081022" opacity="0.85" />
+          <circle cx="250" cy="80" r="36" fill="#0b1220" stroke="#9ad3e8" stroke-width="4"/>
+          <circle cx="238" cy="76" r="6" fill="#fff"/>
+          <circle cx="262" cy="76" r="6" fill="#fff"/>
+          <rect x="200" y="170" width="100" height="20" rx="6" fill="#071427" opacity="0.9"/>
+          <text x="250" y="200" text-anchor="middle" fill="#9fb9cc" font-size="16" font-family="sans-serif">404</text>
+          <!-- layar -->
+          <rect x="190" y="110" width="120" height="64" rx="8" fill="#061426"/>
+          <g transform="translate(205,130)">
+            <path d="M0 0 L60 0" stroke="#6ee7b7" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="18" cy="-18" r="6" fill="#fde68a" />
+          </g>
+        </g>
+
+        <!-- floating dots -->
+        <g fill="#fff" opacity="0.08">
+          <circle cx="60" cy="60" r="4"/>
+          <circle cx="520" cy="40" r="3"/>
+          <circle cx="540" cy="120" r="5"/>
+          <circle cx="480" cy="320" r="6"/>
+          <circle cx="120" cy="320" r="3"/>
+        </g>
+      </svg>
+    </div>
+  </main>
 </body>
 </html>
